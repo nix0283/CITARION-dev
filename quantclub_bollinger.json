@@ -1,0 +1,18 @@
+{
+  "code": 200,
+  "data": {
+    "description": "",
+    "html": "<html><head><meta name=\"color-scheme\" content=\"light dark\"></head><body><pre style=\"word-wrap: break-word; white-space: pre-wrap;\">def calculate_bollinger_bands(data, window=20, num_sd=2):\n    \"\"\"\n    Calculate Bollinger Bands for a given financial time series dataset.\n\n    Bollinger Bands are volatility bands placed above and below a simple moving average (SMA).\n    They provide an indication of relative price levels over a specified period.\n\n    Parameters:\n    ----------\n    data : pandas.DataFrame\n        A DataFrame containing at least the 'close' column with closing prices of the asset.\n    window : int, optional\n        The rolling window period used to calculate the simple moving average (SMA) and rolling standard deviation. \n        Default is 20.\n    num_sd : float, optional\n        The number of standard deviations to determine the upper and lower bands. Default is 2.\n\n    Returns:\n    -------\n    upper_band : pandas.Series\n        The upper Bollinger Band values.\n    lower_band : pandas.Series\n        The lower Bollinger Band values.\n\n    Example:\n    -------\n    >>> import pandas as pd\n    >>> data = pd.DataFrame({'close': [100, 102, 104, 103, 101, 105, 110]})\n    >>> upper_band, lower_band = calculate_bollinger_bands(data, window=3, num_sd=2)\n    >>> print(upper_band)\n    >>> print(lower_band)\n    \"\"\"\n    sma = data['close'].rolling(window).mean()\n    rolling_std = data['close'].rolling(window).std()\n    upper_band = sma + (rolling_std * num_sd)\n    lower_band = sma - (rolling_std * num_sd)\n    return upper_band, lower_band\n</pre></body></html>",
+    "title": "",
+    "url": "https://raw.githubusercontent.com/the-quantclub-iitbhu/Technical-indicators/main/calculate_bollinger_bands.py",
+    "usage": {
+      "tokens": 382
+    }
+  },
+  "meta": {
+    "usage": {
+      "tokens": 382
+    }
+  },
+  "status": 20000
+}

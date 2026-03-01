@@ -1,0 +1,18 @@
+{
+  "code": 200,
+  "data": {
+    "description": "",
+    "html": "<html><head><meta name=\"color-scheme\" content=\"light dark\"></head><body><pre style=\"word-wrap: break-word; white-space: pre-wrap;\">import pandas as pd\r\nimport numpy as np\r\n\r\ndef calculate_adx(data, period=14, smoothing_period=14):\r\n    \"\"\"\r\n    Calculate the Average Directional Index (ADX) for a given dataset.\r\n\r\n    Parameters:\r\n    ----------\r\n    data : pandas.DataFrame\r\n        DataFrame containing 'high', 'low', and 'close' price columns.\r\n    period : int, optional\r\n        The lookback period for calculating TR, DM+, and DM-. Default is 14.\r\n    smoothing_period : int, optional\r\n        The smoothing period for the ADX calculation. Default is 14.\r\n\r\n    Returns:\r\n    -------\r\n    pandas.DataFrame\r\n        DataFrame with columns: TR, DM+, DM-, DI+, DI-, DX, and ADX.\r\n    \"\"\"\r\n    df = data.copy()\r\n    df['TR'] = np.maximum(df['high'] - df['low'], \r\n                          np.maximum(abs(df['high'] - df['close'].shift()), abs(df['low'] - df['close'].shift())))\r\n    df['DM+'] = np.where((df['high'] - df['high'].shift()) > (df['low'].shift() - df['low']), \r\n                         np.maximum(df['high'] - df['high'].shift(), 0), 0)\r\n    df['DM-'] = np.where((df['low'].shift() - df['low']) > (df['high'] - df['high'].shift()), \r\n                         np.maximum(df['low'].shift() - df['low'], 0), 0)\r\n    \r\n    df['TR'] = df['TR'].rolling(window=period).mean()\r\n    df['DM+'] = df['DM+'].rolling(window=period).mean()\r\n    df['DM-'] = df['DM-'].rolling(window=period).mean()\r\n\r\n    df['DI+'] = 100 * (df['DM+'] / df['TR'])\r\n    df['DI-'] = 100 * (df['DM-'] / df['TR'])\r\n    df['DX'] = 100 * abs(df['DI+'] - df['DI-']) / (df['DI+'] + df['DI-'])\r\n    df['ADX'] = df['DX'].rolling(window=smoothing_period).mean()\r\n    return df\r\n</pre></body></html>",
+    "title": "",
+    "url": "https://raw.githubusercontent.com/the-quantclub-iitbhu/Technical-indicators/main/adx.py",
+    "usage": {
+      "tokens": 511
+    }
+  },
+  "meta": {
+    "usage": {
+      "tokens": 511
+    }
+  },
+  "status": 20000
+}

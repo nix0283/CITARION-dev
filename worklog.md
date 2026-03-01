@@ -4127,3 +4127,60 @@ Key Features:
 - Публикация событий через Event Bus
 - Метрики производительности портфеля
 
+
+---
+Task ID: 33
+Agent: Main
+Task: Immediate + Short-term ML Enhancements
+
+Work Log:
+IMMEDIATE TASKS:
+- Created Training Data Collector (/src/lib/ml/training-data-collector.ts ~670 lines):
+  - TrainingDataCollector class for collecting signal outcomes
+  - collectFromDatabase(), collectFromTrades(), collectAll()
+  - Feature extraction: RSI, Trend, Volatility, Momentum
+  - Auto-training with configurable threshold
+- Created Signal Pipeline Tester (/src/lib/ml/signal-pipeline-tester.ts ~550 lines):
+  - 12 test cases across 4 stages
+  - Performance target: <10ms for HFT signals
+- Created ML WebSocket Integration (/src/lib/ml/ml-websocket.ts ~350 lines):
+  - Real-time updates replacing polling
+  - Auto-reconnect with exponential backoff
+- Added Prisma Models: MLTrainingSample, MLEvaluationMetrics
+- Created API endpoints: /api/ml/training, /api/ml/pipeline-test
+- Created Documentation: /docs/ML_PIPELINE_IMMEDIATE.md
+
+SHORT-TERM TASKS:
+- Created ML Evaluation API (/src/app/api/ml/evaluation/route.ts ~300 lines):
+  - GET endpoint with period/symbol filters
+  - Feature importance calculation
+  - Performance by bot and symbol
+- Created ML Evaluation Dashboard (/src/components/ml/ml-evaluation-dashboard.tsx ~420 lines):
+  - Key metrics visualization
+  - Feature importance bars
+  - Performance breakdown by bot/symbol
+  - Period selector and auto-refresh
+- Created Documentation: /docs/ML_PIPELINE_SHORTTERM.md
+
+Stage Summary:
+- Complete training data collection system
+- End-to-end pipeline testing framework
+- Real-time WebSocket updates
+- Model evaluation dashboard
+- Ready for Medium-term tasks
+
+Files Created:
+- /src/lib/ml/training-data-collector.ts (~670 lines)
+- /src/lib/ml/signal-pipeline-tester.ts (~550 lines)
+- /src/lib/ml/ml-websocket.ts (~350 lines)
+- /src/app/api/ml/training/route.ts (~150 lines)
+- /src/app/api/ml/pipeline-test/route.ts (~60 lines)
+- /src/app/api/ml/evaluation/route.ts (~300 lines)
+- /src/components/ml/ml-evaluation-dashboard.tsx (~420 lines)
+- /docs/ML_PIPELINE_IMMEDIATE.md (~350 lines)
+- /docs/ML_PIPELINE_SHORTTERM.md (~250 lines)
+
+Files Modified:
+- prisma/schema.prisma (added MLTrainingSample, MLEvaluationMetrics models)
+
+Total New Code: ~3100+ lines

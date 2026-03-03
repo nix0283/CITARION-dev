@@ -1,0 +1,18 @@
+{
+  "code": 200,
+  "data": {
+    "description": "",
+    "html": "<html><head><meta name=\"color-scheme\" content=\"light dark\"></head><body><pre style=\"word-wrap: break-word; white-space: pre-wrap;\"># Binance API signature examples\n\n[Binance API document](https://binance-docs.github.io/apidocs/spot/en/#signed-trade-user_data-and-margin-endpoint-security) has the details of how to hash the signature.\nHowever we are still seeing users spending hours to find out why server still complains about bad signatures. In this repo, we give the example script on how to do signature.\n\nCode in this repository should NOT be used in production.\n\n## How it works\nIn each language, the script will try to hash following string and should return same signature\n\n```bash\n# hashing string\ntimestamp=1578963600000\n# and return\nd84e6641b1e328e7b418fff030caed655c266299c9355e36ce801ed14631eed4\n\n# hashing string\nsymbol=LTCBTC&side=BUY&type=LIMIT&timeInForce=GTC&quantity=1&price=0.1&recvWindow=5000&timestamp=1499827319559\n# and return\nc8db56825ae71d6d79447849e617115f4a920fa2acdcab2b053c4b2838bd6b71\n\n```\n\nThe secret is the same as `NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j`\n\n## Should I look into this repo\n- if you don't know what's signature\n- if you don't know how to do sha256 hashing in a language\n- if your signature can't pass the server's validation\n\n## Which language included\n\n- C++ \n- Dotnet\n- Go\n- Java\n- NodeJS\n- PHP\n- Python\n- Ruby\n- Shell\n\n\n## License\nMIT\n</pre></body></html>",
+    "title": "",
+    "url": "https://raw.githubusercontent.com/binance/binance-signature-examples/master/README.md",
+    "usage": {
+      "tokens": 445
+    }
+  },
+  "meta": {
+    "usage": {
+      "tokens": 445
+    }
+  },
+  "status": 20000
+}

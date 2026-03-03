@@ -1,0 +1,92 @@
+[
+  {
+    "url": "https://github.com/orgs/okx/repositories",
+    "name": "okx repositories - GitHub",
+    "snippet": "X Layer Toolkit is a collection of development and maintenance tools provided by OKX to support the X Layer ecosystem development and operations.",
+    "host_name": "github.com",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/okx/xlayer-toolkit",
+    "name": "okx/xlayer-toolkit: X Layer Toolkit is a collection of development and",
+    "snippet": "X Layer Toolkit is a collection of development and maintenance tools provided by OKX to support the X Layer ecosystem development and operations.",
+    "host_name": "github.com",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/okx",
+    "name": "OKX.com - GitHub",
+    "snippet": "OKX is a world-leading digital asset exchange, providing advanced financial services to traders globally by using blockchain technology.",
+    "host_name": "github.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/okx/xlayer-reth",
+    "name": "okx/xlayer-reth - GitHub",
+    "snippet": "Overview. XLayer Reth is a customized implementation of Reth optimized for the XLayer network, an Optimism-based Layer 2 solution.",
+    "host_name": "github.com",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/okx/xlayer-node",
+    "name": "okx/xlayer-node - GitHub",
+    "snippet": "Since this is an implementation of a protocol it's fundamental to understand it, here you can find the specification of the protocol.",
+    "host_name": "github.com",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/okx/xlayer-data-availability",
+    "name": "okx/xlayer-data-availability: cdk-data-availability - GitHub",
+    "snippet": "Storing all data on-chain can lead to bloated blockchains, slow transactions, and high fees. Data Availability Nodes facilitate a separation ...",
+    "host_name": "github.com",
+    "rank": 5,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/okx/xlayer-erigon",
+    "name": "okx/xlayer-erigon: Ethereum implementation on the efficiency frontier",
+    "snippet": "Config files are the easiest way to configure cdk-erigon, there are examples in the repository for each network e.g. hermezconfig-mainnet.yaml.example . Running ...",
+    "host_name": "github.com",
+    "rank": 6,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.okx.com/learn/okx-ventures-ai-crypto-convergence",
+    "name": "OKX Ventures Report on Crypto and AI Convergence",
+    "snippet": "The report explores the convergence of AI and crypto, a major trend in the current market cycle that is giving rise to new applications and innovations.",
+    "host_name": "www.okx.com",
+    "rank": 7,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.youtube.com/watch%3Fv%3D7BR1JYvWF-c",
+    "name": "OKX X Layer Explained Full Developers Guide to OKX X Layer",
+    "snippet": "OKX, the second biggest crypto exchange just launched X1. A ZK-EVM L2 chain built using the Polygon CDK. In this video, we'll cover ... Missing: github repositories",
+    "host_name": "www.youtube.com",
+    "rank": 8,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.okx.com/learn/what-is-multiversx",
+    "name": "What Is MultiversX (EGLD)? - OKX",
+    "snippet": "Developers can tap into official SDKs, API docs, and GitHub repositories to start building with MultiversX. The network supports multiple ...",
+    "host_name": "www.okx.com",
+    "rank": 9,
+    "date": "",
+    "favicon": ""
+  }
+]

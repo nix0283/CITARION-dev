@@ -1,0 +1,47 @@
+[
+  {
+    "url": "https://www.investopedia.com/trading/heikin-ashi-better-candlestick",
+    "name": "Master Trending Markets with Heikin-Ashi Charts - Investopedia",
+    "snippet": "Heikin-Ashi is a trading tool used by technical traders to smooth out candlestick patterns, making it easier to read and reveal price trends. It ...\nLearn to use Heikin-Ashi charts for better trend analysis and informed trading decisions with improved clarity and reduced market noise.",
+    "host_name": "www.investopedia.com",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.highcharts.com/blog/tutorials/how-to-read-hollow-candlesticks",
+    "name": "How to Read Hollow Candlesticks - Highcharts",
+    "snippet": "Candles within the Hollow candlestick chart are hollow or solid, depending on how high or low the current close price is compared to the current open price.",
+    "host_name": "www.highcharts.com",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://trendspider.com/learning-center/introduction-to-chart-types",
+    "name": "Introduction to Chart Types | TrendSpider Learning Center",
+    "snippet": "Hollow candlestick charts are used to identify trends, patterns, and potential trading opportunities based on the price movements of an asset over time. Hollow ...",
+    "host_name": "trendspider.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://devexperts.com/blog/dxcharts-tools-exploring-different-chart-types",
+    "name": "DXcharts Tools: Exploring Different Chart Types - Devexperts Blog",
+    "snippet": "Heikin-Ashi is a type of charting technique used in technical analysis to display the price movements of an asset. The Heikin-Ashi chart uses ...",
+    "host_name": "devexperts.com",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.moomoo.com/ca/learn/detail-decoding-chart-types-choosing-the-right-view-117885-250422006",
+    "name": "Decoding Chart Types: Choosing the Right View - Moomoo",
+    "snippet": "For Heikin Ashi chart, you can smooth out choppy price actions of the Candlestick chart and see the previous trends clearly from the beginning ...",
+    "host_name": "www.moomoo.com",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  }
+]

@@ -1,0 +1,92 @@
+[
+  {
+    "url": "https://github.com/binance/binance-connector-python",
+    "name": "Binance Python Connectors - GitHub",
+    "snippet": "Collection of auto-generated Python SDK for Binance APIs. Prerequisites Before using the SDK, ensure you have: Available SDK Documentation",
+    "host_name": "github.com",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/binance",
+    "name": "Binance - GitHub",
+    "snippet": "This is a thin library that working as a connector to the Binance public API.",
+    "host_name": "github.com",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://developers.binance.com/docs/algo/quick-start",
+    "name": "Quick Start | Binance Open Platform",
+    "snippet": "This is a lightweight library that works as a connector to Binance public API, written for Java users. https://github.com/binance/binance-connector-java ...",
+    "host_name": "developers.binance.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/binance-exchange/binance-official-api-docs",
+    "name": "Official Documentation for the Binance APIs and Streams - GitHub",
+    "snippet": "The Binance API documentation on Github has been moved to our official company repository: https://github.com/binance/binance-spot-api-docs Missing: connector | Show results with: connector",
+    "host_name": "github.com",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/binance/binance-connector-js",
+    "name": "A simple connector to Binance Public API - GitHub",
+    "snippet": "Before using the connectors, ensure you have: Node.js (version 22.12.0 or later); npm (comes with Node.js); nvm (Node Version Manager).",
+    "host_name": "github.com",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://developers.binance.com/docs/derivatives/usds-margined-futures/general-info",
+    "name": "General Info | Binance Open Platform",
+    "snippet": "The following SDKs are provided by partners and users, and are not officially produced. They are only used to help users become familiar with the API endpoint.",
+    "host_name": "developers.binance.com",
+    "rank": 5,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://crates.io/crates/binance-sdk",
+    "name": "binance-sdk - crates.io: Rust Package Registry",
+    "snippet": "Official collection of auto-generated Rust SDK modules for Binance APIs. Migration Guide. If you're upgrading from the previous connector, refer ...",
+    "host_name": "crates.io",
+    "rank": 6,
+    "date": "Feb 16, 2026",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/binance/binance-futures-connector-python",
+    "name": "Simple python connector to Binance Futures API - GitHub",
+    "snippet": "A lightweight library that works as a connector to Binance Futures public API. Supported APIs: Installation pip install binance-futures-connector RESTful APIs",
+    "host_name": "github.com",
+    "rank": 7,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.npmjs.com/package/%40binance/connector",
+    "name": "@binance/connector - npm",
+    "snippet": "A lightweight library that works as a connector to Binance public API. It's designed to be simple, clean, and easy to use with minimal dependencies.",
+    "host_name": "www.npmjs.com",
+    "rank": 8,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/tiagosiebler/binance",
+    "name": "Node.js & JavaScript SDK for Binance REST APIs & WebSockets",
+    "snippet": "Node.js & JavaScript SDK for Binance REST APIs & WebSockets, with TypeScript & browser support, integration tests, beautification & more.",
+    "host_name": "github.com",
+    "rank": 9,
+    "date": "",
+    "favicon": ""
+  }
+]

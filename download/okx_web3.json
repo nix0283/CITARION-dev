@@ -1,0 +1,92 @@
+[
+  {
+    "url": "https://github.com/okx/js-wallet-sdk",
+    "name": "okx/js-wallet-sdk: Multi-chain typescript signature sdk  - GitHub",
+    "snippet": "OKX Web3 Wallet SDK is a comprehensive TypeScript/JavaScript solution for building wallet applications that support offline transactions across multiple ...",
+    "host_name": "github.com",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/okxwallet",
+    "name": "okxwallet - GitHub",
+    "snippet": "wallet-adapter Public Forked from anza-xyz/wallet-adapter Modular TypeScript wallet adapters and components for Solana applications.",
+    "host_name": "github.com",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://web3.okx.com/build/docs/waas/private-key-wallet-javascript-sdk",
+    "name": "Javascript Signing SDK | Web3 Developer Docs - OKX Wallet",
+    "snippet": "Js-wallet-sdk is a wallet solution based on TypeScript/JavaScript language that includes various public chains' different cryptographic algorithms and common ...",
+    "host_name": "web3.okx.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/okxwallet/web3-react-okxwallet-SDK",
+    "name": "web3-react-okxwallet-SDK - GitHub",
+    "snippet": "Install web3-react first. download the code or npm install @okwallet/web3-react-okxwallet; import it. Example.",
+    "host_name": "github.com",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://web3.okx.com/build/dev-docs/wallet-api/dex-sdk-introduction",
+    "name": "Introduction | DEX SDK | Resources | Wallet API Docs",
+    "snippet": "The OKX DEX SDK is a typescript toolkit for developers to integrate OKX DEX API functionalities into their applications. GitHub Repository https://github.com/ ...",
+    "host_name": "web3.okx.com",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/okx",
+    "name": "OKX.com - GitHub",
+    "snippet": "OKX is a world-leading digital asset exchange, providing advanced financial services to traders globally by using blockchain technology.",
+    "host_name": "github.com",
+    "rank": 5,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.npmjs.com/package/%2540okxweb3%252Fcoin-flow",
+    "name": "@okxweb3/coin-flow - npm",
+    "snippet": "A flow SDK for building Web3 wallets and applications.. Latest version: 1.1.0, last published: a year ago. Start using @okxweb3/coin-flow in ...",
+    "host_name": "www.npmjs.com",
+    "rank": 6,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://web3.okx.com/build/docs/waas/private-key-wallet-go-sdk",
+    "name": "Go Signing SDK | Web3 Developer Docs - OKX Wallet",
+    "snippet": "Go-wallet-sdk is a wallet solution based on Go language that includes various public chains' different cryptographic algorithms and common functionalities.",
+    "host_name": "web3.okx.com",
+    "rank": 7,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/blocknative/web3-onboard/blob/develop/packages/okx/README.md",
+    "name": "web3-onboard/packages/okx/README.md at develop - GitHub",
+    "snippet": "OKX Wallet SDK wallet module for connecting to Web3-Onboard. Web3-Onboard makes it simple to connect Ethereum hardware and software wallets to your dapp.",
+    "host_name": "github.com",
+    "rank": 8,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/topics/okx-api%3Fl%3Dc%2523%26o%3Ddesc%26s%3Dupdated",
+    "name": "okx-api · GitHub Topics",
+    "snippet": "Exploits OKX Wallet by displaying fake crypto balances to trick users into sending real funds, enabling attackers to steal cryptocurrencies ...",
+    "host_name": "github.com",
+    "rank": 9,
+    "date": "",
+    "favicon": ""
+  }
+]

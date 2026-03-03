@@ -1,0 +1,47 @@
+[
+  {
+    "url": "https://stackoverflow.com/questions/5917655/point-and-figure-implementation",
+    "name": "charts - Point And Figure - implementation - Stack Overflow",
+    "snippet": "The best recommendation that I can give for creating an obscure chart format such as point & figure is to try and create it from the tools provided in Protovis.",
+    "host_name": "stackoverflow.com",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=XuhQhQid1bc",
+    "name": "Point and Figure Charts: Tutorial - YouTube",
+    "snippet": "Today's video covers Point and Figure charts on TradingView. Point and figure charts ... // p&f chart tutorial basics trading strategy video. Missing: XO JavaScript implementation",
+    "host_name": "www.youtube.com",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://cuong-le.medium.com/building-the-best-point-figure-chart-engine-for-every-platform-667e94d9127f",
+    "name": "Building the Best Point & Figure Chart Engine — for Every Platform",
+    "snippet": "We built a chart engine that renders Point & Figure (PnF) charts better than anything else on the market — and it runs everywhere: desktop, web, ... Missing: XO | Show results with: XO",
+    "host_name": "cuong-le.medium.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://thetradinganalyst.com/point-and-figure-chart",
+    "name": "Trader's Guide to Interpreting the Point and Figure Chart (2025)",
+    "snippet": "In this guide, we'll break down how P&F charts work, how to read them, and why they remain a valuable tool for traders and investors.",
+    "host_name": "thetradinganalyst.com",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.tradingview.com/support/solutions/43000502276-what-are-point-and-figure-charts",
+    "name": "What are point and figure charts - TradingView",
+    "snippet": "Point and figure charts are another type of chart that relies solely on price movements rather than time intervals. Missing: XO implementation",
+    "host_name": "www.tradingview.com",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  }
+]

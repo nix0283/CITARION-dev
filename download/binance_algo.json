@@ -1,0 +1,92 @@
+[
+  {
+    "url": "https://github.com/philipzabicki/binance-algotrading",
+    "name": "philipzabicki/binance-algotrading - GitHub",
+    "snippet": "This repository is a collection of personal tools designed for strategy analysis and algorithmic trading on the Binance exchange.",
+    "host_name": "github.com",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/freqtrade/freqtrade",
+    "name": "freqtrade/freqtrade: Free, open source crypto trading bot - GitHub",
+    "snippet": "Freqtrade is a free and open source crypto trading bot written in Python. It is designed to support all major exchanges and be controlled via Telegram or webUI.",
+    "host_name": "github.com",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/topics/algo-trading-strategies%3Fl%3Dpython",
+    "name": "algo-trading-strategies · GitHub Topics",
+    "snippet": "Run strategies for Backtest and Live Trading. Get historical price data for Bitcoin, Ethereum and all coins from Binance. EASY create your strategies. bitcoin ...",
+    "host_name": "github.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.binance.com/trading-bots",
+    "name": "Trading Bots - Binance",
+    "snippet": "Deploy Binance automation tools to trade crypto like a pro. Identify and replicate trending strategies on the largest exchange with unparalleled liquidity.",
+    "host_name": "www.binance.com",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.greptile.com/grepository/binance-trade-bot",
+    "name": "Binance Trade Bot | Github Stats & Trends | Grepository - Greptile",
+    "snippet": "It implements a strategy of trading from stronger-performing coins to weaker-performing ones, with the assumption that market positions will eventually reverse.",
+    "host_name": "www.greptile.com",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/Gunthersuper/Binance-Futures-Trading-Bot",
+    "name": "Gunthersuper/Binance-Futures-Trading-Bot: Algo trading strategies",
+    "snippet": "Algo trading strategies . Contribute to Gunthersuper/Binance-Futures-Trading-Bot development by creating an account on GitHub.",
+    "host_name": "github.com",
+    "rank": 5,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.reddit.com/r/Python/comments/n9smh1/i_wrote_another_binance_trading_algo_in_python",
+    "name": "I wrote another Binance trading algo in Python. This one is able to",
+    "snippet": "The bot will buy 100 USDT of the most volatile coins on Binance. The bot will sell at 6% profit or 3% stop loss. Anyway, here's the source code ...",
+    "host_name": "www.reddit.com",
+    "rank": 6,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/topics/grid-strategy%3Fl%3Dpython",
+    "name": "grid-strategy · GitHub Topics",
+    "snippet": "Binance_grid_trader is a grid strategy bot trading with Binance Spot and Binance Futures Exchange. you can use it to trade any pair in Binance Exchange.",
+    "host_name": "github.com",
+    "rank": 7,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "http://www.google.com/url?esrc=s&q=&rct=j&sa=U&url=http://codesandbox.io/p/github/chrisleekr/binance-trading-bot&ved=2ahUKEwjEyaiszeeSAxU7l1YBHb3WD34QFnoECAkQAg&usg=AOvVaw20BwNmGs17-wO9r5U3Jie8",
+    "name": "binance-trading-bot - Codesandbox",
+    "snippet": "The bot will continuously monitor the coin based on the grid trade configuration. For grid trade #1, the bot will place a STOP-LOSS-LIMIT order to buy when the ...",
+    "host_name": "www.google.com",
+    "rank": 8,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://medium.com/%40gwrx2005/top-10-ai-powered-crypto-trading-repositories-on-github-0041862546b6",
+    "name": "Top 10 AI-Powered Crypto Trading Repositories on GitHub - Medium",
+    "snippet": "Below is a ranked list of the top 10 GitHub repositories focused on cryptocurrency trading strategies that incorporate AI techniques (e.g. ...",
+    "host_name": "medium.com",
+    "rank": 9,
+    "date": "",
+    "favicon": ""
+  }
+]

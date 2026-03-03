@@ -1,0 +1,92 @@
+[
+  {
+    "url": "https://www.okx.com/docs-v5/en",
+    "name": "OKX API Guide",
+    "snippet": "Dec 8, 2020 — Welcome to our API documentation . OKX provides REST and WebSocket APIs to suit your trading needs. For users who complete registration on ... Read more",
+    "host_name": "www.okx.com",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://tr.okx.com/docs-v5/en",
+    "name": "OKX API guide",
+    "snippet": "Dec 8, 2020 — Error code 50061 is returned when the sub-account rate limit is exceeded . The existing rate limit rule per instrument ID remains unchanged and ... Read more",
+    "host_name": "tr.okx.com",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://web3.okx.com/build/docs/waas/marketplace-error-code",
+    "name": "Error codes - WaaS Marketplace",
+    "snippet": "Code , HTTP status, Message. 0, 200, Succeeded. 50011, 429, Rate limit reached; please refer to API documentation and throttle requests accordingly. Read more",
+    "host_name": "web3.okx.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/Yunfeng-Jiang/API-docs-OKEx.com/blob/master/API-For-Spot-EN/Error%20Code%20For%20Spot.md",
+    "name": "Error Code For Spot - API-docs-OKEx.com",
+    "snippet": "1041, Message Verification incorrect ; 1042, Wrong Google Verification Input exceed the limit ; 1043, Login password cannot be same as the trading password ; 1044 ... Read more",
+    "host_name": "github.com",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.okx.com/vi/web3/build/docs/waas/walletapi-resources-errorcode",
+    "name": "Error Codes | Web3 Developer Docs",
+    "snippet": "Error Codes # ; 50001, 200, Service temporarily unavailable, try again ; 50026, 500, System busy, try again later ; 81104, 200, Blockchain not supported ; 81105, 200 ... Read more",
+    "host_name": "www.okx.com",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.okx.com/docs-v5/broker_en",
+    "name": "Broker Program – OKX API guide",
+    "snippet": "API keys with trading or withdrawal permissions that are not bound to ... Error Code. Error Message, HTTP Status Code, Error Code. 53000, 400, Invalid token. Read more",
+    "host_name": "www.okx.com",
+    "rank": 5,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://wundertrading.com/journal/en/learn/article/okx-api",
+    "name": "How to Use OKX API for Trading & Integration",
+    "snippet": "May 21, 2025 — Learn how to use OKX API for secure cryptocurrency trading, automation, and third-party app integration in this complete guide.",
+    "host_name": "wundertrading.com",
+    "rank": 6,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.meshpay.com/blog/does-okx-have-an-api",
+    "name": "Does Okx have an API? - Mesh",
+    "snippet": "Error code 50000: This error signifies a general system error. Read more",
+    "host_name": "www.meshpay.com",
+    "rank": 7,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://docs.multimarkets.org/bridge-api/access-instructions/error-code",
+    "name": "Error Code - MultiMarkets API Docs",
+    "snippet": "Oct 16, 2024 — DIRECTOKX-50029 =Your account has triggered OKX risk control and is temporarily restricted from conducting transactions. Please check your ... Read more",
+    "host_name": "docs.multimarkets.org",
+    "rank": 8,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.npmjs.com/package/okx-api",
+    "name": "okx-api - Node.js SDK for OKX APIs",
+    "snippet": "Feb 9, 2026 — These can be populated using parameters specified by okx's API documentation , or check the type definition in the rest-client class methods. Read more",
+    "host_name": "www.npmjs.com",
+    "rank": 9,
+    "date": "",
+    "favicon": ""
+  }
+]

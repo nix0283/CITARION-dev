@@ -1,0 +1,92 @@
+[
+  {
+    "url": "https://tradingview.github.io/lightweight-charts/tutorials/customization/intro",
+    "name": "Customizing the Chart | Lightweight Charts",
+    "snippet": "This tutorial provides an introduction to customizing Lightweight Chart's appearance and functionality.",
+    "host_name": "tradingview.github.io",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/tradingview/lightweight-charts",
+    "name": "tradingview/lightweight-charts: Performant financial charts built with HTML5 canvas",
+    "snippet": "TradingView Lightweight Charts are one of the smallest and fastest financial HTML5 charts. The Lightweight Charts library is the best choice for you",
+    "host_name": "github.com",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.tradingview.com/charting-library-docs/latest/custom_studies",
+    "name": "Custom indicators | Advanced Charts Documentation",
+    "snippet": "Advanced Charts and Trading Platform support more than 100 indicators. You can also create your custom indicators in JavaScript using the library's API. The ...\nAdvanced Charts and Trading Platform support more than 100 indicators. You can also create your custom indicators in JavaScript using the library's API. The API allows you to create a variety of indicators using different plot types, styles, colors, and mathematical functions.",
+    "host_name": "www.tradingview.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://discuss.streamlit.io/t/how-to-add-custom-indicators-to-lightweight-charts-in-streamlit/109462",
+    "name": "How to Add Custom Indicators to Lightweight Charts in Streamlit?",
+    "snippet": "Apr 17, 2025 — However, I'd like to add custom indicators (like Moving Average, RSI, Bollinger Bands, etc.) on the chart. Is there a way to add these ...",
+    "host_name": "discuss.streamlit.io",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/tradingview/lightweight-charts/discussions/647",
+    "name": "Is is possible to add a study/indicator to the chart? · tradingview lightweight-charts · Discussion #647",
+    "snippet": "Dec 11, 2020 — With Lightweight Charts you have to implement any indicator you'd like to offer/use. Most if not all formula can be obtain online on ...\nLightweight Charts doesn't have the same concept of indicators as the other library. With Lightweight Charts you have to implement any indicator you'd like to offer/use.",
+    "host_name": "github.com",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.reddit.com/r/TradingView/comments/1n3t6bt/need_help_using_tradingview_lightweight_charts",
+    "name": "Need Help: Using TradingView Lightweight Charts with Custom API Data on Bubble.io (No Coding Experience)",
+    "snippet": "I'm trying to use the TradingView Lightweight Charts (HTML/JS) on my website, but I'm running into issues and could use some guidance. Here's my ...",
+    "host_name": "www.reddit.com",
+    "rank": 5,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://stackoverflow.com/questions/76393873/tradingview-lightweight-charts-add-pane",
+    "name": "TradingView Lightweight Charts add pane",
+    "snippet": "I want to add multiple panes to my TV-Lightweight Chart, but I can't make it work. There is this SO question: LightWeightChart: How can i add chart which ...",
+    "host_name": "stackoverflow.com",
+    "rank": 6,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://tradingview.github.io/lightweight-charts/docs/plugins/intro",
+    "name": "Plugins | Lightweight Charts",
+    "snippet": "Plugins allow you to extend the library's functionality and render custom elements, such as new series, drawing tools, indicators, and watermarks.",
+    "host_name": "tradingview.github.io",
+    "rank": 7,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://tradingview.github.io/lightweight-charts/tutorials/analysis-indicators",
+    "name": "Analysis indicators | Lightweight Charts",
+    "snippet": "Below is a list of indicators where each link points to their source code on GitHub. You can see all the indicators in action on the live demos page. Each indicator has two demos: Helper: shows the recommended method with automatic updates. Direct calculation: shows the method with a pure function.",
+    "host_name": "tradingview.github.io",
+    "rank": 8,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/tradingview/lightweight-charts/tree/master/indicator-examples",
+    "name": "lightweight-charts/indicator-examples at master - GitHub",
+    "snippet": "This directory contains implementations of indicator calculations and examples of how they can be shown on a chart. To run these examples locally follow these steps: Visit localhost:5173 in the browser. Check the output in the compiled folder.",
+    "host_name": "github.com",
+    "rank": 9,
+    "date": "",
+    "favicon": ""
+  }
+]

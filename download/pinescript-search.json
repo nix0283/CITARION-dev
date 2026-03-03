@@ -1,0 +1,92 @@
+[
+  {
+    "url": "https://github.com/Opus-Aether-AI/pine-transpiler",
+    "name": "Opus-Aether-AI/pine-transpiler - GitHub",
+    "snippet": "This tool allows you to run Pine Script indicators directly within the Charting Library by transpiling them into standard JavaScript objects ...",
+    "host_name": "github.com",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/topics/pine-script",
+    "name": "pine-script · GitHub Topics",
+    "snippet": "PineTS is an open-source transpiler and runtime that brings Pine Script logic to Node.js and the browser with 1:1 syntax compatibility. Reliably write, port, ...",
+    "host_name": "github.com",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://open-vsx.org/extension/revanthpobala/pine-script-pro",
+    "name": "Pine Script Pro - Open VSX Registry",
+    "snippet": "Professional Language Support for Pine Script. Static analysis, type-infection checking, and intelligent tooltips for advanced TradingView developers. Missing: JavaScript | Show results with: JavaScript",
+    "host_name": "open-vsx.org",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.reddit.com/r/pinescript/comments/1kddxqa/built_an_opensource_pine_script_engine_for",
+    "name": "Built an OpenSource Pine Script engine for JavaScript/TypeScript",
+    "snippet": "The goal is to bring Pine Script logic into JS so developers can build, test, backtest, or experiment with indicators in custom apps or tooling. I built an Open Source Pine Script to TypeScript transpiler that runs ... I Built an OpenSource Pine Script engine for JavaScript/TypeScript More results from www.reddit.com Missing: parser interpreter",
+    "host_name": "www.reddit.com",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://stackoverflow.com/questions/69642461/how-to-convert-tradingview-pine-script-code-to-javascript",
+    "name": "How to convert TradingView Pine Script code to JavaScript?",
+    "snippet": "There is no converter for such things. Pine Language has nothing to do with JavaScript, so you will need to write your own implementation for each function. How does PineScript parse 'if series1 > series2'? - Stack Overflow How to implement a Pine Script preprocessor - Stack Overflow More results from stackoverflow.com",
+    "host_name": "stackoverflow.com",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://medium.datadriveninvestor.com/couldnt-find-a-pinescript-language-support-on-ide-so-i-built-one-enjoy-1fe57df0560f",
+    "name": "Couldn't Find a (PineScript) language Support on IDE, So I Built one",
+    "snippet": "TL;DR: I released a free, open-source PineScript v6 VSCode extension that gives you IntelliSense, rich hover docs, and real-time validation.",
+    "host_name": "medium.datadriveninvestor.com",
+    "rank": 5,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://dranolia.medium.com/integrating-pine-script-python-fastapi-langchain-014b733bd066",
+    "name": "Integrating Pine Script, Python & LangChain | by offline-pixel - Medium",
+    "snippet": "Pine Script excels at creating custom indicators, strategies, and generating real-time alerts based on price action and indicator crosses. It's ...",
+    "host_name": "dranolia.medium.com",
+    "rank": 6,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://marketplace.visualstudio.com/items%3FitemName%3Dkaigouthro.pinescript-vscode",
+    "name": "Pine Script VS Code - Visual Studio Marketplace",
+    "snippet": "It leverages real-time linting via TradingView's API and combines it with powerful local parsing to deliver an intelligent and responsive coding experience.",
+    "host_name": "marketplace.visualstudio.com",
+    "rank": 7,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/be-thomas/OpenPineScript",
+    "name": "be-thomas/OpenPineScript - GitHub",
+    "snippet": "OpenPineScript is an open-source runtime for Pine Script code, providing a free and extensible platform to execute and experiment with Pine ...",
+    "host_name": "github.com",
+    "rank": 8,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.freecodecamp.org/news/the-programming-language-pipeline-91d3f449c919",
+    "name": "I wrote a programming language. Here's how you can, too.",
+    "snippet": "In this post, I'll dive under the hood and show you the pipeline Pinecone (and other programming languages) use to turn source code into magic.",
+    "host_name": "www.freecodecamp.org",
+    "rank": 9,
+    "date": "",
+    "favicon": ""
+  }
+]

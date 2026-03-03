@@ -1,0 +1,92 @@
+[
+  {
+    "url": "https://www.tradingview.com/pine-script-docs/v5/concepts/libraries",
+    "name": "Concepts / Libraries",
+    "snippet": "Pine Script® libraries are publications containing functions that can be reused in indicators, strategies, or in other libraries. They are useful to define ...",
+    "host_name": "www.tradingview.com",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.tradingview.com/charting-library-docs/latest/ui_elements/indicators",
+    "name": "Indicators | Advanced Charts Documentation",
+    "snippet": "You can create your custom indicators in JavaScript. Refer to Custom Studies for more information. Note that Pine Script® is not supported in the libraries.",
+    "host_name": "www.tradingview.com",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.tradingview.com/free-charting-libraries",
+    "name": "Free Charting Library by TradingView",
+    "snippet": "Free Charting Library for your website or mobile app. TradingView Charting Library comes with API to show your own data. Customizable and easy to install.",
+    "host_name": "www.tradingview.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.tradingview.com/scripts",
+    "name": "Trading Strategies & Indicators Built by TradingView Community",
+    "snippet": "Browse scripts to find the best strategies, indicators, or libraries built using Pine Script®. Over 100000 publications to go beyond ordinary in market ...",
+    "host_name": "www.tradingview.com",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.tradingview.com/advanced-charts",
+    "name": "TradingView Advanced Charts — Free Charting Library",
+    "snippet": "Powerful financial charts by TradingView: grab interactive, easy-to-integrate charts built for websites. Trusted by 40000 companies, used by professionals.",
+    "host_name": "www.tradingview.com",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.tradingview.com/features",
+    "name": "TradingView Features — Power Up Your Analysis & Trading",
+    "snippet": "Create any tools you want with Pine. This language was specifically designed so you can craft scripts easily and efficiently, with thousands of built-in ...",
+    "host_name": "www.tradingview.com",
+    "rank": 5,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.tradingview.com/charting-library-docs/latest/custom_studies",
+    "name": "Custom indicators | Advanced Charts Documentation",
+    "snippet": "The API allows you to create a variety of indicators using different plot types, styles, colors, and mathematical functions.",
+    "host_name": "www.tradingview.com",
+    "rank": 6,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://pineify.app/resources/blog/tradingview-charting-library-empowering-developers-with-advanced-financial-visualization",
+    "name": "TradingView Charting Library: Empowering Developers with Advanced Financial Visualization | Pineify Blog",
+    "snippet": "28 Jul 2025 — Discover how the TradingView Charting Library enables developers to embed interactive financial charts with 100+ technical indicators, ...",
+    "host_name": "pineify.app",
+    "rank": 7,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.tradingview.com/pine-script-docs/concepts/libraries",
+    "name": "Concepts / Libraries - TradingView",
+    "snippet": "Pine Script® libraries are publications containing functions that can be reused in indicators, strategies, or in other libraries. They are useful to define frequently-used functions so their source code does not have to be included in every script where they are needed.",
+    "host_name": "www.tradingview.com",
+    "rank": 8,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://pineify.app/resources/blog/tradingview-codes-the-complete-guide-to-pine-script-indicators-strategies-and-embeds",
+    "name": "TradingView Codes: The Complete Guide to Pine Script",
+    "snippet": "Master TradingView codes with this complete guide to Pine Script programming, custom indicators, strategy backtesting, and chart widget embeds. Learn how to write, adapt, and deploy powerful trading tools for analysis and web publishing.",
+    "host_name": "pineify.app",
+    "rank": 9,
+    "date": "",
+    "favicon": ""
+  }
+]

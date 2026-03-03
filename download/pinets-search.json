@@ -1,0 +1,92 @@
+[
+  {
+    "url": "https://github.com/QuantForgeOrg/PineTS",
+    "name": "Run Pine Script anywhere. PineTS is an open-source  - GitHub",
+    "snippet": "PineTS is an open-source transpiler and runtime that brings Pine Script logic to Node.js and the browser with 1:1 syntax compatibility. Reliably write, port, ...",
+    "host_name": "github.com",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.npmjs.com/package/%2540vibetrader%252Fpinets",
+    "name": "vibetrader/pinets - NPM",
+    "snippet": "PineTS makes it possible to migrate Pine Script v5+ indicators to Javascript/Typescript, in order to run them in a Javascript environment.",
+    "host_name": "www.npmjs.com",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.reddit.com/r/TradingView/comments/1kddwf4/i_built_an_open_source_pine_script_to_typescript",
+    "name": "I built an Open Source Pine Script to TypeScript transpiler that runs",
+    "snippet": "The goal is to bring Pine Script logic into JS so developers can build, test, backtest, or experiment with indicators in custom apps or tooling.",
+    "host_name": "www.reddit.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://stackoverflow.com/questions/69642461/how-to-convert-tradingview-pine-script-code-to-javascript",
+    "name": "How to convert TradingView Pine Script code to JavaScript?",
+    "snippet": "There is no converter for such things. Pine Language has nothing to do with JavaScript, so you will need to write your own implementation for each function.",
+    "host_name": "stackoverflow.com",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://quantforgeorg.github.io/PineTS",
+    "name": "Home | PineTS",
+    "snippet": "PineTS is a TypeScript implementation of the Pine Script language, allowing you to write trading indicators and strategies using TypeScript while leveraging the ...",
+    "host_name": "quantforgeorg.github.io",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/topics/pine-script%3Fl%3Dtypescript",
+    "name": "pine-script · GitHub Topics",
+    "snippet": "Run Pine Script anywhere. PineTS is an open-source transpiler and runtime that brings Pine Script logic to Node.js and the browser with 1:1 ...",
+    "host_name": "github.com",
+    "rank": 5,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.reddit.com/r/pinescript/comments/1kddxqa/built_an_opensource_pine_script_engine_for",
+    "name": "Built an OpenSource Pine Script engine for JavaScript/TypeScript",
+    "snippet": "I've been working on a fun side project called PineTS, it's an Open Source TypeScript/JavaScript library that lets you write Pine Script-style ...",
+    "host_name": "www.reddit.com",
+    "rank": 6,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/QuantForgeOrg/PineTS/blob/main/AGENTS.md",
+    "name": "AGENTS.md - QuantForgeOrg/PineTS - GitHub",
+    "snippet": "Pine Script Transpiler: Converts native Pine Script v5+ code to PineTS syntax; PineTS Runtime Transpiler: Transforms PineTS syntax into executable JavaScript ...",
+    "host_name": "github.com",
+    "rank": 7,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://pineify.app/resources/blog/converting-pine-script-to-javascript-a-comprehensive-guide",
+    "name": "Converting Pine Script to JavaScript: A Comprehensive Guide",
+    "snippet": "Learn how to convert Pine Script to JavaScript with our comprehensive guide, enhancing your trading tools across multiple platforms. Missing: TypeScript transpiler",
+    "host_name": "pineify.app",
+    "rank": 8,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.youtube.com/watch%3Fv%3Dvp8VYmXNjV0",
+    "name": "Converting Pinescript to Javascript With TrendSpider's AI - YouTube",
+    "snippet": "Free market updates straight to your inbox https://trendspider.cc/TradingNewsletter In the custom indicator editor, you can simply paste in ... Missing: PineTS TypeScript transpiler",
+    "host_name": "www.youtube.com",
+    "rank": 9,
+    "date": "",
+    "favicon": ""
+  }
+]

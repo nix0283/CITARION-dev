@@ -79,6 +79,7 @@
     "react-resizable-panels": "^3.0.3",
     "react-syntax-highlighter": "^15.6.1",
     "recharts": "^2.15.4",
+    "redis": "^5.11.0",
     "satori": "^0.19.2",
     "sharp": "^0.34.5",
     "socket.io-client": "^4.8.3",

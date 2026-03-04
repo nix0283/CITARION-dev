@@ -57,4 +57,21 @@ export {
   type ReconciliationConfig,
 } from './position-reconciliation';
 
+// Liquidation Protection Module
+export {
+  calculateLiquidationPrice,
+  getDistanceToLiquidation,
+  validateMarginSafety,
+  calculateMaxSafeLeverage,
+  calculateRequiredMargin,
+  getPortfolioLiquidationRisk,
+  type Exchange as LiquidationExchange,
+  type MarginMode,
+  type PositionSide,
+  type PositionParams,
+  type MaintenanceMarginConfig,
+  type LiquidationResult,
+  type ValidationResult,
+} from './liquidation-protection';
+
 export * from './types';

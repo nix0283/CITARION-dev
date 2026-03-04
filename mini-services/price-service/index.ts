@@ -2,6 +2,38 @@ import { Server } from "socket.io";
 
 const PORT = 3002;
 
+// CORS Configuration - Production Ready
+// Set ALLOWED_ORIGINS environment variable for production
+// Example: ALLOWED_ORIGINS=http://localhost:3000,http://localhost:3001,https://app.citarion.com
+const getAllowedOrigins = (): string[] => {
+  const env = process.env.NODE_ENV || 'development';
+  const allowedOriginsEnv = process.env.ALLOWED_ORIGINS;
+  
+  if (allowedOriginsEnv) {
+    return allowedOriginsEnv.split(',').map(origin => origin.trim()).filter(Boolean);
+  }
+  
+  // Default origins based on environment
+  if (env === 'production') {
+    console.error(
+      '[SECURITY] ALLOWED_ORIGINS not set in production. ' +
+      'CORS will block all cross-origin requests. ' +
+      'Set ALLOWED_ORIGINS environment variable.'
+    );
+    return []; // Block all cross-origin requests in production
+  }
+  
+  // Development defaults
+  return [
+    'http://localhost:3000',
+    'http://localhost:3001',
+    'http://127.0.0.1:3000',
+    'http://127.0.0.1:3001',
+  ];
+};
+
+const allowedOrigins = getAllowedOrigins();
+
 // Supported exchanges
 const EXCHANGES = {
   binance: {
@@ -53,15 +85,43 @@ interface PriceData {
 // Store latest prices by exchange
 const pricesByExchange: Record<string, Record<string, PriceData>> = {};
 
-// Initialize Socket.IO server
+// Initialize Socket.IO server with secure CORS
 const io = new Server(PORT, {
   cors: {
-    origin: "*",
+    origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
+      // Allow requests with no origin (like mobile apps, curl, Postman)
+      if (!origin) {
+        callback(null, true);
+        return;
+      }
+      
+      // Check if origin is in allowed list
+      if (allowedOrigins.length === 0) {
+        // No origins configured - reject in production, allow in dev
+        const env = process.env.NODE_ENV || 'development';
+        if (env === 'production') {
+          console.error(`[CORS] Blocked request from origin: ${origin} (no allowed origins configured)`);
+          callback(new Error('CORS policy: No origins configured'), false);
+        } else {
+          callback(null, true);
+        }
+        return;
+      }
+      
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        console.warn(`[CORS] Blocked request from unauthorized origin: ${origin}`);
+        callback(new Error('CORS policy: Origin not allowed'), false);
+      }
+    },
     methods: ["GET", "POST"],
+    credentials: true,
   },
 });
 
 console.log(`Multi-Exchange Price Service running on port ${PORT}`);
+console.log(`CORS allowed origins: ${allowedOrigins.length > 0 ? allowedOrigins.join(', ') : 'All (development only)'}`);
 
 // Connect to Binance WebSocket
 function connectToBinance(type: "spot" | "futures") {

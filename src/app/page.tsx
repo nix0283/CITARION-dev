@@ -81,25 +81,36 @@ function DashboardContent() {
     switch (activeTab) {
       case "dashboard":
         return (
-          <div className="space-y-6">
-            {/* Row 1: Balance, Trading, Positions */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <div className="space-y-6">
+          <div className="space-y-4">
+            {/* Row 1: Main Trading Panel - Full Width Chart Style */}
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+              {/* Left Panel: Balance + Quick Actions */}
+              <div className="lg:col-span-1 space-y-4">
                 <BalanceWidget />
                 <TradingForm />
               </div>
-              <div className="space-y-6">
+              
+              {/* Center Panel: Chart */}
+              <div className="lg:col-span-2 h-[400px] lg:h-[500px] rounded-lg border border-border bg-card overflow-hidden">
+                <PriceChart />
+              </div>
+              
+              {/* Right Panel: Positions + Signals */}
+              <div className="lg:col-span-1 space-y-4">
                 <PositionsTable />
                 <SignalFeed />
               </div>
-              <div className="space-y-6">
-                <MarketOverview />
-                <MarketForecastWidget />
-                <FundingRateWidget />
-              </div>
             </div>
-            {/* Row 2: Active Bots Widgets */}
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            
+            {/* Row 2: Market Overview - Horizontal Cards */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+              <MarketOverview />
+              <MarketForecastWidget />
+              <FundingRateWidget />
+            </div>
+            
+            {/* Row 3: Active Bots - 4 Column Grid */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
               <ActiveGridBots />
               <ActiveDcaBots />
               <ActiveBBBots />
@@ -110,14 +121,26 @@ function DashboardContent() {
 
       case "chart":
         return (
-          <div className="flex-1 flex flex-col min-h-0 rounded-lg border border-border bg-card overflow-hidden" data-testid="chart-container">
-            <PriceChart />
+          <div className="flex-1 flex flex-col min-h-0 gap-4">
+            {/* Chart with Order Book - Trading Terminal Style */}
+            <div className="flex-1 flex gap-4 min-h-[500px]">
+              {/* Main Chart */}
+              <div className="flex-1 rounded-lg border border-border bg-card overflow-hidden" data-testid="chart-container">
+                <PriceChart />
+              </div>
+              
+              {/* Right Side Panel: Quick Trade */}
+              <div className="hidden xl:block w-80 space-y-4">
+                <TradingForm />
+                <PositionsTable />
+              </div>
+            </div>
           </div>
         );
 
       case "multi-chart":
         return (
-          <div className="flex-1 flex flex-col min-h-0 rounded-lg border border-border bg-card overflow-hidden" data-testid="multi-chart-container">
+          <div className="flex-1 flex flex-col min-h-0 gap-4">
             <MultiChartPanel
               renderChart={(symbol, timeframe, chartId) => (
                 <div key={chartId} className="h-full w-full" data-testid={`chart-${chartId}`}>

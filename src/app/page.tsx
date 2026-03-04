@@ -81,40 +81,65 @@ function DashboardContent() {
     switch (activeTab) {
       case "dashboard":
         return (
-          <div className="space-y-4">
-            {/* Row 1: Main Trading Panel - Full Width Chart Style */}
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-              {/* Left Panel: Balance + Quick Actions */}
-              <div className="lg:col-span-1 space-y-4">
+          <div className="flex flex-col h-full gap-4">
+            {/* Main Trading Panel - Trading Terminal Style Layout */}
+            <div className="flex-1 flex flex-col lg:flex-row gap-4 min-h-0">
+              {/* Left Panel: Trading Controls */}
+              <div className="lg:w-72 xl:w-80 flex-shrink-0 space-y-4 overflow-y-auto">
                 <BalanceWidget />
                 <TradingForm />
               </div>
               
-              {/* Center Panel: Chart */}
-              <div className="lg:col-span-2 h-[400px] lg:h-[500px] rounded-lg border border-border bg-card overflow-hidden">
+              {/* Center Panel: Chart - Primary Focus */}
+              <div className="flex-1 min-h-[400px] lg:min-h-0 rounded-lg border border-border bg-card overflow-hidden flex flex-col">
                 <PriceChart />
               </div>
               
-              {/* Right Panel: Positions + Signals */}
-              <div className="lg:col-span-1 space-y-4">
+              {/* Right Panel: Positions & Signals */}
+              <div className="lg:w-80 xl:w-96 flex-shrink-0 space-y-4 overflow-y-auto">
                 <PositionsTable />
                 <SignalFeed />
               </div>
             </div>
             
-            {/* Row 2: Market Overview - Horizontal Cards */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-              <MarketOverview />
-              <MarketForecastWidget />
-              <FundingRateWidget />
-            </div>
-            
-            {/* Row 3: Active Bots - 4 Column Grid */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-              <ActiveGridBots />
-              <ActiveDcaBots />
-              <ActiveBBBots />
-              <ActiveArgusBots />
+            {/* Bottom Section: Configuration Panels - Entries/TP/SL Style */}
+            <div className="flex-shrink-0 border-t border-border pt-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {/* Entries Panel */}
+                <div className="rounded-lg border border-border bg-card p-4">
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="w-2 h-2 rounded-full bg-blue-500"></div>
+                    <h3 className="text-sm font-semibold text-foreground">Активные боты</h3>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2">
+                    <ActiveGridBots />
+                    <ActiveDcaBots />
+                    <ActiveBBBots />
+                    <ActiveArgusBots />
+                  </div>
+                </div>
+                
+                {/* Take Profits Panel */}
+                <div className="rounded-lg border border-border bg-card p-4">
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                    <h3 className="text-sm font-semibold text-foreground">Рыночный обзор</h3>
+                  </div>
+                  <MarketOverview />
+                </div>
+                
+                {/* Stop Loss Panel */}
+                <div className="rounded-lg border border-border bg-card p-4">
+                  <div className="flex items-center gap-2 mb-3">
+                    <div className="w-2 h-2 rounded-full bg-orange-500"></div>
+                    <h3 className="text-sm font-semibold text-foreground">Аналитика</h3>
+                  </div>
+                  <div className="space-y-4">
+                    <MarketForecastWidget />
+                    <FundingRateWidget />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         );
@@ -122,17 +147,22 @@ function DashboardContent() {
       case "chart":
         return (
           <div className="flex-1 flex flex-col min-h-0 gap-4">
-            {/* Chart with Order Book - Trading Terminal Style */}
+            {/* Trading Terminal Style - Full Chart with Side Controls */}
             <div className="flex-1 flex gap-4 min-h-[500px]">
-              {/* Main Chart */}
+              {/* Left Panel: Trading Controls */}
+              <div className="hidden lg:block w-72 flex-shrink-0 space-y-4 overflow-y-auto">
+                <TradingForm />
+              </div>
+              
+              {/* Main Chart - Primary Focus */}
               <div className="flex-1 rounded-lg border border-border bg-card overflow-hidden" data-testid="chart-container">
                 <PriceChart />
               </div>
               
-              {/* Right Side Panel: Quick Trade */}
-              <div className="hidden xl:block w-80 space-y-4">
-                <TradingForm />
+              {/* Right Side Panel: Positions */}
+              <div className="hidden xl:block w-80 flex-shrink-0 space-y-4 overflow-y-auto">
                 <PositionsTable />
+                <SignalFeed />
               </div>
             </div>
           </div>
@@ -154,24 +184,43 @@ function DashboardContent() {
 
       case "trading":
         return (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div className="space-y-6">
-              <TradingForm />
-              <PositionsTable />
-            </div>
-            <div className="space-y-6">
-              <MarketOverview />
-              <MarketForecastWidget />
+          <div className="flex flex-col h-full gap-4">
+            {/* Trading Panel - Trading Terminal Style */}
+            <div className="flex-1 flex flex-col lg:flex-row gap-4 min-h-0">
+              {/* Left Panel: Trading Form + Positions */}
+              <div className="lg:w-80 flex-shrink-0 space-y-4 overflow-y-auto">
+                <TradingForm />
+                <PositionsTable />
+              </div>
+              
+              {/* Center Panel: Market Data */}
+              <div className="flex-1 space-y-4 overflow-y-auto">
+                <MarketOverview />
+                <MarketForecastWidget />
+              </div>
+              
+              {/* Right Panel: Signals */}
+              <div className="lg:w-80 flex-shrink-0 space-y-4 overflow-y-auto">
+                <SignalFeed />
+              </div>
             </div>
           </div>
         );
 
       case "chat":
         return (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <ChatBot />
-            <div className="space-y-6">
-              <SignalFeed />
+          <div className="flex flex-col h-full gap-4">
+            {/* Chat Panel - Full Width with Side Info */}
+            <div className="flex-1 flex flex-col lg:flex-row gap-4 min-h-0">
+              {/* Main Chat */}
+              <div className="flex-1 min-h-[400px] lg:min-h-0">
+                <ChatBot />
+              </div>
+              
+              {/* Right Panel: Signal Feed */}
+              <div className="lg:w-80 flex-shrink-0 space-y-4 overflow-y-auto">
+                <SignalFeed />
+              </div>
             </div>
           </div>
         );
@@ -193,59 +242,67 @@ function DashboardContent() {
 
       case "exchanges":
         return (
-          <>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <ExchangeSelector />
-              <ConnectedAccounts />
+          <div className="flex flex-col h-full gap-4">
+            {/* Exchanges Panel - Trading Terminal Style */}
+            <div className="flex-1 flex flex-col lg:flex-row gap-4 min-h-0">
+              {/* Left Panel: Exchange Selector */}
+              <div className="lg:w-80 flex-shrink-0 overflow-y-auto">
+                <ExchangeSelector />
+              </div>
+              
+              {/* Right Panel: Connected Accounts */}
+              <div className="flex-1 overflow-y-auto">
+                <ConnectedAccounts />
+              </div>
             </div>
-            <div className="grid grid-cols-1 gap-6 mt-6">
-              <div className="p-6 rounded-lg border border-border bg-card">
-                <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                  <Building2 className="h-5 w-5 text-primary" />
-                  Поддерживаемые биржи
-                </h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div>
-                    <h4 className="font-medium text-sm mb-2">Spot Биржи</h4>
-                    <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>• Binance</li>
-                      <li>• Bybit</li>
-                      <li>• OKX</li>
-                      <li>• Bitget</li>
-                      <li>• KuCoin</li>
-                      <li>• BingX</li>
-                      <li>• Coinbase</li>
-                      <li>• Huobi</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-sm mb-2">Futures Биржи</h4>
-                    <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>• Binance</li>
-                      <li>• Bybit</li>
-                      <li>• OKX</li>
-                      <li>• Bitget</li>
-                      <li>• KuCoin</li>
-                      <li>• BingX</li>
-                      <li>• HyperLiquid</li>
-                      <li>• BloFin</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="font-medium text-sm mb-2">Inverse Биржи</h4>
-                    <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>• Binance</li>
-                      <li>• Bybit</li>
-                      <li>• OKX</li>
-                      <li>• Bitget</li>
-                      <li>• BitMEX</li>
-                      <li>• BloFin</li>
-                    </ul>
-                  </div>
+            
+            {/* Bottom Panel: Supported Exchanges */}
+            <div className="flex-shrink-0 rounded-lg border border-border bg-card p-6">
+              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                <Building2 className="h-5 w-5 text-primary" />
+                Поддерживаемые биржи
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <h4 className="font-medium text-sm mb-2">Spot Биржи</h4>
+                  <ul className="text-sm text-muted-foreground space-y-1">
+                    <li>• Binance</li>
+                    <li>• Bybit</li>
+                    <li>• OKX</li>
+                    <li>• Bitget</li>
+                    <li>• KuCoin</li>
+                    <li>• BingX</li>
+                    <li>• Coinbase</li>
+                    <li>• Huobi</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-medium text-sm mb-2">Futures Биржи</h4>
+                  <ul className="text-sm text-muted-foreground space-y-1">
+                    <li>• Binance</li>
+                    <li>• Bybit</li>
+                    <li>• OKX</li>
+                    <li>• Bitget</li>
+                    <li>• KuCoin</li>
+                    <li>• BingX</li>
+                    <li>• HyperLiquid</li>
+                    <li>• BloFin</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-medium text-sm mb-2">Inverse Биржи</h4>
+                  <ul className="text-sm text-muted-foreground space-y-1">
+                    <li>• Binance</li>
+                    <li>• Bybit</li>
+                    <li>• OKX</li>
+                    <li>• Bitget</li>
+                    <li>• BitMEX</li>
+                    <li>• BloFin</li>
+                  </ul>
                 </div>
               </div>
             </div>
-          </>
+          </div>
         );
 
       case "auto-trading-settings":
@@ -325,17 +382,37 @@ function DashboardContent() {
 
       case "wallet":
         return (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <BalanceWidget />
-            <MarketOverview />
+          <div className="flex flex-col h-full gap-4">
+            {/* Wallet Panel - Trading Terminal Style */}
+            <div className="flex-1 flex flex-col lg:flex-row gap-4 min-h-0">
+              {/* Left Panel: Balance */}
+              <div className="lg:w-80 flex-shrink-0 overflow-y-auto">
+                <BalanceWidget />
+              </div>
+              
+              {/* Right Panel: Market Overview */}
+              <div className="flex-1 overflow-y-auto">
+                <MarketOverview />
+              </div>
+            </div>
           </div>
         );
 
       case "settings":
         return (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <ExchangeSelector />
-            <ConnectedAccounts />
+          <div className="flex flex-col h-full gap-4">
+            {/* Settings Panel - Trading Terminal Style */}
+            <div className="flex-1 flex flex-col lg:flex-row gap-4 min-h-0">
+              {/* Left Panel: Exchange Selector */}
+              <div className="lg:w-80 flex-shrink-0 overflow-y-auto">
+                <ExchangeSelector />
+              </div>
+              
+              {/* Right Panel: Connected Accounts */}
+              <div className="flex-1 overflow-y-auto">
+                <ConnectedAccounts />
+              </div>
+            </div>
           </div>
         );
 
@@ -403,17 +480,25 @@ function DashboardContent() {
 
       default:
         return (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="space-y-6">
-              <BalanceWidget />
-              <TradingForm />
-            </div>
-            <div className="space-y-6">
-              <PositionsTable />
-              <SignalFeed />
-            </div>
-            <div className="space-y-6">
-              <MarketOverview />
+          <div className="flex flex-col h-full gap-4">
+            {/* Default Panel - Trading Terminal Style */}
+            <div className="flex-1 flex flex-col lg:flex-row gap-4 min-h-0">
+              {/* Left Panel */}
+              <div className="lg:w-80 flex-shrink-0 space-y-4 overflow-y-auto">
+                <BalanceWidget />
+                <TradingForm />
+              </div>
+              
+              {/* Center Panel */}
+              <div className="flex-1 space-y-4 overflow-y-auto">
+                <PositionsTable />
+                <SignalFeed />
+              </div>
+              
+              {/* Right Panel */}
+              <div className="lg:w-80 flex-shrink-0 overflow-y-auto">
+                <MarketOverview />
+              </div>
             </div>
           </div>
         );

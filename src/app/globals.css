@@ -478,3 +478,565 @@ div[data-testid="attribution"] {
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(2px);
 }
+
+/* ============================================
+   Cornix UI-Example Adaptation Styles
+   ============================================ */
+
+/* Panel color indicators (Entries/TP/SL style) */
+.panel-indicator-blue {
+  @apply w-2 h-2 rounded-full bg-blue-500;
+}
+
+.panel-indicator-green {
+  @apply w-2 h-2 rounded-full bg-green-500;
+}
+
+.panel-indicator-orange {
+  @apply w-2 h-2 rounded-full bg-orange-500;
+}
+
+.panel-indicator-purple {
+  @apply w-2 h-2 rounded-full bg-purple-500;
+}
+
+/* Section header with indicator */
+.section-header {
+  @apply flex items-center gap-2 mb-3;
+}
+
+.section-header-indicator {
+  @apply flex items-center gap-2 mb-3 pb-2 border-b border-border;
+}
+
+/* Stat card styling */
+.stat-card {
+  @apply bg-card rounded-lg p-4 border border-border hover:shadow-sm transition-shadow;
+}
+
+.stat-label {
+  @apply text-xs text-muted-foreground uppercase tracking-wider mb-1;
+}
+
+.stat-value {
+  @apply text-2xl font-bold text-foreground;
+}
+
+.stat-value-large {
+  @apply text-3xl font-bold text-foreground;
+}
+
+.stat-trend-positive {
+  @apply text-green-500 text-sm flex items-center gap-1;
+}
+
+.stat-trend-negative {
+  @apply text-red-500 text-sm flex items-center gap-1;
+}
+
+/* Config section styling */
+.config-section {
+  @apply rounded-lg border border-border bg-card p-4 space-y-4;
+}
+
+.config-section-title {
+  @apply text-sm font-semibold text-foreground mb-3;
+}
+
+.config-row {
+  @apply flex items-center justify-between py-2;
+}
+
+.config-label {
+  @apply text-sm text-muted-foreground;
+}
+
+.config-value {
+  @apply text-sm font-medium text-foreground;
+}
+
+/* Bot card styling */
+.bot-card {
+  @apply rounded-lg border border-border bg-card overflow-hidden hover:shadow-md transition-all duration-200;
+}
+
+.bot-card-header {
+  @apply p-4 border-b border-border flex items-center justify-between;
+}
+
+.bot-card-body {
+  @apply p-4 space-y-4;
+}
+
+.bot-card-footer {
+  @apply p-4 border-t border-border flex items-center justify-end gap-2;
+}
+
+/* Mini chart container */
+.mini-chart-container {
+  @apply h-16 w-32 flex items-end gap-0.5;
+}
+
+.mini-chart-bar {
+  @apply w-1 rounded-t bg-primary/50;
+}
+
+/* Time range selector */
+.time-range-selector {
+  @apply flex gap-1;
+}
+
+.time-range-button {
+  @apply px-3 py-1 text-sm font-medium rounded-md transition-colors;
+}
+
+.time-range-button-active {
+  @apply bg-primary text-primary-foreground;
+}
+
+.time-range-button-inactive {
+  @apply bg-muted text-muted-foreground hover:bg-muted/80;
+}
+
+/* Filter tabs */
+.filter-tabs {
+  @apply flex gap-2;
+}
+
+.filter-tab {
+  @apply px-3 py-1 text-sm rounded-full bg-muted hover:bg-muted/80 transition-colors;
+}
+
+.filter-tab-active {
+  @apply bg-primary/10 text-primary;
+}
+
+/* Notification item */
+.notification-item {
+  @apply p-4 border-b border-border hover:bg-muted/50 cursor-pointer transition-colors;
+}
+
+.notification-item-unread {
+  @apply bg-primary/5;
+}
+
+/* Trader card */
+.trader-card {
+  @apply rounded-lg border border-border bg-card p-4 hover:shadow-md transition-shadow;
+}
+
+.trader-stat {
+  @apply text-center;
+}
+
+.trader-stat-label {
+  @apply text-xs text-muted-foreground;
+}
+
+.trader-stat-value {
+  @apply text-lg font-semibold;
+}
+
+/* Data table enhancements */
+.data-table-header {
+  @apply px-4 py-3 text-left text-sm font-medium text-muted-foreground border-b border-border;
+}
+
+.data-table-row {
+  @apply border-b border-border/50 hover:bg-muted/30 transition-colors;
+}
+
+.data-table-cell {
+  @apply px-4 py-3 text-sm;
+}
+
+/* Metrics grid */
+.metrics-grid-2 {
+  @apply grid grid-cols-2 gap-4;
+}
+
+.metrics-grid-3 {
+  @apply grid grid-cols-3 gap-4;
+}
+
+.metrics-grid-4 {
+  @apply grid grid-cols-4 gap-4;
+}
+
+/* Panel layouts */
+.panel-left-fixed {
+  @apply w-72 lg:w-80 flex-shrink-0;
+}
+
+.panel-right-fixed {
+  @apply w-80 lg:w-96 flex-shrink-0;
+}
+
+.panel-main {
+  @apply flex-1 min-w-0;
+}
+
+/* Status badge */
+.status-badge {
+  @apply inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-medium;
+}
+
+.status-badge-active {
+  @apply bg-green-500/10 text-green-600 dark:text-green-400;
+}
+
+.status-badge-inactive {
+  @apply bg-gray-500/10 text-gray-600 dark:text-gray-400;
+}
+
+.status-badge-pending {
+  @apply bg-yellow-500/10 text-yellow-600 dark:text-yellow-400;
+}
+
+.status-badge-error {
+  @apply bg-red-500/10 text-red-600 dark:text-red-400;
+}
+
+/* Risk meter */
+.risk-meter {
+  @apply h-2 rounded-full bg-muted overflow-hidden;
+}
+
+.risk-meter-fill {
+  @apply h-full rounded-full transition-all duration-300;
+}
+
+.risk-low {
+  @apply bg-green-500;
+}
+
+.risk-medium {
+  @apply bg-yellow-500;
+}
+
+.risk-high {
+  @apply bg-orange-500;
+}
+
+.risk-critical {
+  @apply bg-red-500;
+}
+
+/* Progress indicator */
+.progress-ring {
+  @apply transform -rotate-90;
+}
+
+.progress-ring-circle {
+  @apply transition-all duration-300;
+}
+
+/* Bot status indicator */
+.bot-status-dot {
+  @apply w-2 h-2 rounded-full;
+}
+
+.bot-status-running {
+  @apply bg-green-500 animate-pulse;
+}
+
+.bot-status-paused {
+  @apply bg-yellow-500;
+}
+
+.bot-status-stopped {
+  @apply bg-gray-400;
+}
+
+.bot-status-error {
+  @apply bg-red-500;
+}
+
+/* Configuration grid */
+.config-grid-2 {
+  @apply grid grid-cols-2 gap-3;
+}
+
+.config-grid-3 {
+  @apply grid grid-cols-3 gap-3;
+}
+
+.config-grid-4 {
+  @apply grid grid-cols-4 gap-3;
+}
+
+/* Quick action button */
+.quick-action {
+  @apply h-8 px-3 text-sm rounded-md font-medium transition-all duration-150;
+}
+
+.quick-action-primary {
+  @apply bg-primary text-primary-foreground hover:brightness-110 active:scale-[0.98];
+}
+
+.quick-action-secondary {
+  @apply bg-secondary text-secondary-foreground hover:bg-secondary/80 active:scale-[0.98];
+}
+
+.quick-action-ghost {
+  @apply hover:bg-muted text-foreground active:scale-[0.98];
+}
+
+/* Divider with text */
+.divider-text {
+  @apply flex items-center gap-4 text-sm text-muted-foreground;
+}
+
+.divider-text::before,
+.divider-text::after {
+  content: '';
+  @apply flex-1 h-px bg-border;
+}
+
+/* Responsive text sizes */
+.text-responsive-sm {
+  @apply text-xs sm:text-sm;
+}
+
+.text-responsive-base {
+  @apply text-sm sm:text-base;
+}
+
+.text-responsive-lg {
+  @apply text-base sm:text-lg;
+}
+
+/* Responsive spacing */
+.space-responsive {
+  @apply space-y-3 sm:space-y-4 lg:space-y-6;
+}
+
+/* Card elevation */
+.elevation-0 {
+  @apply shadow-none;
+}
+
+.elevation-1 {
+  @apply shadow-sm;
+}
+
+.elevation-2 {
+  @apply shadow-md;
+}
+
+.elevation-3 {
+  @apply shadow-lg;
+}
+
+/* ============================================
+   Additional UI Components
+   ============================================ */
+
+/* Config row layout */
+.config-row {
+  @apply flex items-center justify-between py-2 border-b border-border/30 last:border-0;
+}
+
+.config-label {
+  @apply text-sm text-muted-foreground;
+}
+
+.config-value {
+  @apply text-sm font-medium text-foreground;
+}
+
+/* Metrics grid */
+.metrics-grid-2 {
+  @apply grid grid-cols-2 gap-4;
+}
+
+.metrics-grid-3 {
+  @apply grid grid-cols-3 gap-4;
+}
+
+.metrics-grid-4 {
+  @apply grid grid-cols-4 gap-4;
+}
+
+/* Metric display */
+.metric-label {
+  @apply text-[10px] text-muted-foreground uppercase tracking-wider;
+}
+
+.metric-value {
+  @apply text-sm font-semibold text-foreground;
+}
+
+.metric-value-success {
+  @apply text-green-500;
+}
+
+.metric-value-error {
+  @apply text-red-500;
+}
+
+.metric-value-primary {
+  @apply text-primary;
+}
+
+/* Mini chart bar chart */
+.mini-chart-container {
+  @apply flex items-end gap-0.5 w-full;
+}
+
+.mini-chart-bar {
+  @apply w-2 bg-primary/60 rounded-t;
+}
+
+.mini-chart-bar:hover {
+  @apply bg-primary;
+}
+
+/* Status Badge */
+.status-badge-active {
+  @apply bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20;
+}
+
+.status-badge-inactive {
+  @apply bg-gray-500/10 text-gray-600 dark:text-gray-400 border-gray-500/20;
+}
+
+.status-badge-pending {
+  @apply bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 border-yellow-500/20;
+}
+
+.status-badge-error {
+  @apply bg-red-500/10 text-red-600 dark:text-red-400 border-red-500/20;
+}
+
+/* Bot status dot */
+.bot-status-dot {
+  @apply w-2 h-2 rounded-full inline-block;
+}
+
+.bot-status-running {
+  @apply bg-green-500;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.bot-status-paused {
+  @apply bg-yellow-500;
+}
+
+.bot-status-stopped {
+  @apply bg-gray-400;
+}
+
+.bot-status-error {
+  @apply bg-red-500;
+}
+
+/* Bot card specific styles */
+.bot-card-body {
+  @apply p-4 space-y-4;
+}
+
+.bot-card-footer {
+  @apply p-4 border-t border-border flex items-center justify-end gap-2 bg-muted/30;
+}
+
+/* Time range selector buttons */
+.time-range-button {
+  @apply px-3 py-1 text-xs font-medium rounded transition-colors;
+}
+
+.time-range-button-active {
+  @apply bg-primary text-primary-foreground;
+}
+
+.time-range-button-inactive {
+  @apply bg-muted text-muted-foreground hover:bg-muted/80;
+}
+
+/* Filter tabs */
+.filter-tabs {
+  @apply flex gap-2 flex-wrap;
+}
+
+.filter-tab {
+  @apply px-3 py-1.5 text-xs font-medium rounded-full bg-muted hover:bg-muted/80 transition-colors cursor-pointer;
+}
+
+.filter-tab-active {
+  @apply bg-primary/10 text-primary border border-primary/20;
+}
+
+/* Data table improvements */
+.data-table-container {
+  @apply rounded-lg border border-border overflow-hidden bg-card;
+}
+
+.data-table-header-row {
+  @apply bg-muted/50 border-b border-border;
+}
+
+.data-table-body-row {
+  @apply border-b border-border/50 hover:bg-muted/30 transition-colors;
+}
+
+.data-table-body-row:last-child {
+  @apply border-b-0;
+}
+
+/* Search input with icon */
+.search-input-container {
+  @apply relative;
+}
+
+.search-input-icon {
+  @apply absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground;
+}
+
+.search-input {
+  @apply pl-10 pr-4 py-2 w-full rounded-md border border-input bg-background text-sm;
+}
+
+/* Card variants */
+.card-default {
+  @apply bg-card border border-border rounded-lg;
+}
+
+.card-interactive {
+  @apply bg-card border border-border rounded-lg hover:shadow-md hover:border-primary/20 transition-all cursor-pointer;
+}
+
+.card-selected {
+  @apply bg-card border-2 border-primary rounded-lg shadow-sm;
+}
+
+/* Loading placeholder */
+.loading-placeholder {
+  @apply bg-muted animate-pulse rounded;
+}
+
+/* Animated value change */
+.value-change-up {
+  animation: flash-green 0.5s ease-out;
+}
+
+.value-change-down {
+  animation: flash-red 0.5s ease-out;
+}
+
+@keyframes flash-green {
+  0% {
+    background-color: rgba(34, 197, 94, 0.3);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+@keyframes flash-red {
+  0% {
+    background-color: rgba(239, 68, 68, 0.3);
+  }
+  100% {
+    background-color: transparent;
+  }
+}

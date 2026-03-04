@@ -86,6 +86,18 @@ export {
   shouldProcessSignal,
 } from './deduplicator';
 
+// Stale Signal Detector
+// Audit Fix: P1.16 - Stale Signal Detection with 30s TTL
+export {
+  StaleSignalDetector,
+  getStaleSignalDetector,
+  type SignalWithTTL,
+  type StaleSignalConfig,
+  type TrackedSignal,
+  type StaleSignalMetrics,
+  type SignalStatus,
+} from './stale-signal-detector';
+
 /**
  * Process a signal with automatic deduplication
  * 

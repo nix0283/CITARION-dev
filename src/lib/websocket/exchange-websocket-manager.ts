@@ -169,6 +169,8 @@ export class ExchangeWebSocketManager extends EventEmitter {
   private pingIntervals: Map<string, NodeJS.Timeout> = new Map();
   private maxReconnectAttempts = 10;
   private reconnectBaseDelay = 1000;
+  private maxReconnectDelay = 60000; // 60 seconds max
+  private jitterFactor = 0.3; // 30% jitter to prevent thundering herd
   private subscriptions: Map<string, Set<string>> = new Map();
   private configs: Map<string, WSConfig> = new Map();
   private wsRecovery: WSStateRecovery;
@@ -905,12 +907,31 @@ export class ExchangeWebSocketManager extends EventEmitter {
 
   // ==================== RECONNECTION ====================
 
+  /**
+   * Calculate exponential backoff delay with jitter
+   * Audit Fix: P1.18 - Implement exponential backoff with jitter for WebSocket reconnection
+   */
+  private calculateReconnectDelay(attempts: number): number {
+    // Exponential backoff: baseDelay * 2^attempts
+    const exponentialDelay = this.reconnectBaseDelay * Math.pow(2, attempts);
+    
+    // Cap at max delay
+    const cappedDelay = Math.min(exponentialDelay, this.maxReconnectDelay);
+    
+    // Add jitter to prevent thundering herd problem
+    // Jitter is random value between 0 and jitterFactor * cappedDelay
+    const jitter = cappedDelay * this.jitterFactor * Math.random();
+    
+    return Math.floor(cappedDelay + jitter);
+  }
+
   private handleReconnect(config: WSConfig): void {
     const key = this.getConnectionKey(config);
     const attempts = this.reconnectAttempts.get(key) || 0;
 
     if (attempts < this.maxReconnectAttempts) {
-      const delay = Math.min(this.reconnectBaseDelay * Math.pow(2, attempts), 60000);
+      // Use exponential backoff with jitter
+      const delay = this.calculateReconnectDelay(attempts);
 
       console.log(`[WS] Reconnecting in ${delay}ms (attempt ${attempts + 1}/${this.maxReconnectAttempts})`);
 

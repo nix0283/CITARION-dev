@@ -160,7 +160,7 @@ const mainMenuItems: MenuItem[] = [
   { id: "dashboard", label: "Дашборд", icon: LayoutDashboard },
   { id: "auto-trading-settings", label: "Настройки автоторговли", icon: Settings },
   { id: "chart", label: "График", icon: CandlestickChart },
-  { id: "multi-chart", label: "Мульти-график", icon: Grid3X3, isNew: true },
+  { id: "multi-chart", label: "Мульти-график", icon: Grid3X3 },
   { id: "trading", label: "Торговля", icon: LineChart },
   { id: "strategy-lab", label: "Лаборатория", icon: FlaskConical },
   { id: "hyperopt", label: "Гипероптим", icon: Sparkles },

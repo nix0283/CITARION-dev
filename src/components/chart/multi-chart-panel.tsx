@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useRef, useEffect } from "react";
 import GridLayout, { Layout } from "react-grid-layout";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -122,26 +122,48 @@ export function MultiChartPanel({
   const [layouts, setLayouts] = useState<ChartLayout[]>(initialLayouts || DEFAULT_CHARTS);
   const [selectedPreset, setSelectedPreset] = useState<string>("2-horizontal");
   const [isEditing, setIsEditing] = useState(false);
+  
+  // Use ref to prevent infinite loop - GridLayout calls onLayoutChange on every render
+  const prevLayoutRef = useRef<string>("");
 
   const handleLayoutChange = useCallback(
     (newLayout: Layout[]) => {
-      const updatedLayouts = layouts.map((chart) => {
-        const layout = newLayout.find((l) => l.i === chart.i);
-        if (layout) {
-          return {
-            ...chart,
-            x: layout.x,
-            y: layout.y,
-            w: layout.w,
-            h: layout.h,
-          };
-        }
-        return chart;
+      // Prevent infinite loop by checking if layout actually changed
+      const layoutKey = newLayout.map(l => `${l.i}:${l.x},${l.y},${l.w},${l.h}`).join("|");
+      if (prevLayoutRef.current === layoutKey) {
+        return;
+      }
+      prevLayoutRef.current = layoutKey;
+      
+      // Use functional update to avoid dependency on layouts
+      setLayouts((prevLayouts) => {
+        // Only update if positions actually changed
+        const hasChanges = prevLayouts.some((chart) => {
+          const layout = newLayout.find((l) => l.i === chart.i);
+          if (!layout) return false;
+          return (
+            chart.x !== layout.x ||
+            chart.y !== layout.y ||
+            chart.w !== layout.w ||
+            chart.h !== layout.h
+          );
+        });
+        
+        if (!hasChanges) return prevLayouts;
+        
+        const updated = prevLayouts.map((chart) => {
+          const layout = newLayout.find((l) => l.i === chart.i);
+          if (layout) {
+            return { ...chart, x: layout.x, y: layout.y, w: layout.w, h: layout.h };
+          }
+          return chart;
+        });
+        
+        onLayoutChange?.(updated);
+        return updated;
       });
-      setLayouts(updatedLayouts);
-      onLayoutChange?.(updatedLayouts);
     },
-    [layouts, onLayoutChange]
+    [onLayoutChange]
   );
 
   const addChart = useCallback(() => {

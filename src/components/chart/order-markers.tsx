@@ -51,17 +51,22 @@ export function useOrderMarkers(
   orders: OrderMarker[],
   config: Partial<OrderMarkerConfig> = {}
 ): ProcessedMarker[] {
-  const cfg = { ...DEFAULT_CONFIG, ...config };
+  // Merge config with defaults
+  const showPending = config.showPending ?? DEFAULT_CONFIG.showPending;
+  const showFilled = config.showFilled ?? DEFAULT_CONFIG.showFilled;
+  const showCancelled = config.showCancelled ?? DEFAULT_CONFIG.showCancelled;
+  const showStopOrders = config.showStopOrders ?? DEFAULT_CONFIG.showStopOrders;
+  const markerSize = config.markerSize ?? DEFAULT_CONFIG.markerSize;
 
   return useMemo(() => {
     const markers: ProcessedMarker[] = [];
 
     for (const order of orders) {
       // Skip based on config
-      if (!cfg.showPending && order.status === "PENDING") continue;
-      if (!cfg.showFilled && order.status === "FILLED") continue;
-      if (!cfg.showCancelled && (order.status === "CANCELLED" || order.status === "REJECTED")) continue;
-      if (!cfg.showStopOrders && (order.type === "STOP" || order.type === "STOP_LIMIT")) continue;
+      if (!showPending && order.status === "PENDING") continue;
+      if (!showFilled && order.status === "FILLED") continue;
+      if (!showCancelled && (order.status === "CANCELLED" || order.status === "REJECTED")) continue;
+      if (!showStopOrders && (order.type === "STOP" || order.type === "STOP_LIMIT")) continue;
 
       const isBuy = order.side === "BUY";
       const isFilled = order.status === "FILLED";
@@ -113,20 +118,20 @@ export function useOrderMarkers(
         color,
         shape,
         text,
-        size: cfg.markerSize,
+        size: markerSize,
         orderId: order.id,
         order,
       });
 
       // Add separate marker for stop price if exists
-      if (order.stopPrice && cfg.showStopOrders) {
+      if (order.stopPrice && showStopOrders) {
         markers.push({
           time: Math.floor(order.createdAt / 1000) as Time,
           position: isBuy ? "aboveBar" : "belowBar",
           color: "#ff9800", // Orange for stop price
           shape: "circle",
           text: `Stop @ ${order.stopPrice.toFixed(2)}`,
-          size: cfg.markerSize - 2,
+          size: markerSize - 2,
           orderId: `${order.id}-stop`,
           order,
         });
@@ -135,7 +140,7 @@ export function useOrderMarkers(
 
     // Sort by time
     return markers.sort((a, b) => (a.time as number) - (b.time as number));
-  }, [orders, cfg]);
+  }, [orders, showPending, showFilled, showCancelled, showStopOrders, markerSize]);
 }
 
 export function getOrderMarkersForChart(

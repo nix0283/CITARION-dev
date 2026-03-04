@@ -18,6 +18,8 @@ import {
   Loader2,
   Keyboard,
   MousePointer2,
+  Wifi,
+  WifiOff,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
@@ -210,6 +212,10 @@ export function PriceChart() {
   const [activeIndicators, setActiveIndicators] = useState<IndicatorConfig[]>([]);
   const [showIndicatorsPanel, setShowIndicatorsPanel] = useState(true);
   
+  // Real-time connection status
+  const [isRealtimeConnected, setIsRealtimeConnected] = useState(false);
+  const realtimePollRef = useRef<NodeJS.Timeout | null>(null);
+  
   // Tooltip state
   const [tooltip, setTooltip] = useState<TooltipData>({
     time: null,
@@ -229,20 +235,28 @@ export function PriceChart() {
   // CIT-044: Order markers state
   const [orders, setOrders] = useState<OrderMarker[]>([]);
   const [showOrderMarkers, setShowOrderMarkers] = useState(true);
-  const processedMarkers = useOrderMarkers(orders, { showPending: true, showFilled: true });
+  
+  // Use useMemo to prevent recreating config object on every render
+  const orderMarkerConfig = useMemo(() => ({ showPending: true, showFilled: true }), []);
+  const processedMarkers = useOrderMarkers(orders, orderMarkerConfig);
 
   // CIT-049: One-click trading state
   const [oneClickEnabled, setOneClickEnabled] = useState(false);
   const [oneClickDialogOpen, setOneClickDialogOpen] = useState(false);
   const [oneClickParams, setOneClickParams] = useState<OneClickTradeParams | null>(null);
-  const oneClickConfig: OneClickTradingConfig = {
+  
+  // Use useMemo to prevent recreating config object on every render
+  const oneClickConfig: OneClickTradingConfig = useMemo(() => ({
     enabled: oneClickEnabled,
     defaultQuantity: 0.001,
     defaultType: "MARKET",
     slippageTolerance: 0.5,
     showConfirmation: true,
     quickSizes: [1, 5, 10, 25, 50, 100],
-  };
+  }), [oneClickEnabled]);
+
+  // Use useMemo for hotkeys config
+  const hotkeysConfig = useMemo(() => ({ enabled: true }), []);
 
   // CIT-043: Setup hotkeys
   useTradingHotkeys({
@@ -271,7 +285,7 @@ export function PriceChart() {
       }
     },
     onRefresh: () => handleRefresh(),
-    config: { enabled: true },
+    config: hotkeysConfig,
   });
 
   // Split indicators into overlay and pane
@@ -578,6 +592,86 @@ export function PriceChart() {
       cancelled = true;
     };
   }, [symbol, timeframe]);
+
+  // Real-time polling for latest candle
+  useEffect(() => {
+    if (isLoading || !symbol) return;
+
+    const pollLatestCandle = async () => {
+      try {
+        const response = await fetch(
+          `/api/ohlcv?symbol=${symbol}&interval=${timeframe}&limit=1&forceFetch=true`
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+
+          if (data.success && data.ohlcv && data.ohlcv.length > 0) {
+            const latestCandle = data.ohlcv[0];
+            const newClose = latestCandle[4];
+            
+            setIsRealtimeConnected(true);
+            
+            // Update current price
+            setCurrentPrice(newClose);
+            
+            // Update the last candle in the array
+            setCandles((prevCandles) => {
+              if (prevCandles.length === 0) return prevCandles;
+              
+              const lastCandle = prevCandles[prevCandles.length - 1];
+              const newTime = Math.floor(latestCandle[0] / 1000);
+              
+              // If same candle (same time), update it
+              if (lastCandle.time === newTime) {
+                const updated = [...prevCandles];
+                updated[updated.length - 1] = {
+                  time: newTime as Time,
+                  open: latestCandle[1],
+                  high: latestCandle[2],
+                  low: latestCandle[3],
+                  close: newClose,
+                  volume: latestCandle[5],
+                };
+                return updated;
+              }
+              
+              // New candle - add it
+              if (newTime > (lastCandle.time as number)) {
+                return [...prevCandles, {
+                  time: newTime as Time,
+                  open: latestCandle[1],
+                  high: latestCandle[2],
+                  low: latestCandle[3],
+                  close: newClose,
+                  volume: latestCandle[5],
+                }];
+              }
+              
+              return prevCandles;
+            });
+          }
+        }
+      } catch (error) {
+        console.error('[Realtime] Poll error:', error);
+        setIsRealtimeConnected(false);
+      }
+    };
+
+    // Poll every 3 seconds
+    realtimePollRef.current = setInterval(pollLatestCandle, 3000);
+    
+    // Initial poll
+    pollLatestCandle();
+
+    return () => {
+      if (realtimePollRef.current) {
+        clearInterval(realtimePollRef.current);
+        realtimePollRef.current = null;
+      }
+      setIsRealtimeConnected(false);
+    };
+  }, [symbol, timeframe, isLoading]);
 
   // Update chart data
   useEffect(() => {
@@ -999,6 +1093,21 @@ export function PriceChart() {
           </div>
 
           <div className="flex items-center gap-3">
+            {/* Real-time Connection Status */}
+            <div className="flex items-center gap-1">
+              {isRealtimeConnected ? (
+                <div className="flex items-center gap-1 text-green-500">
+                  <Wifi className="h-3 w-3" />
+                  <span className="text-xs">LIVE</span>
+                </div>
+              ) : (
+                <div className="flex items-center gap-1 text-muted-foreground">
+                  <WifiOff className="h-3 w-3" />
+                  <span className="text-xs">Offline</span>
+                </div>
+              )}
+            </div>
+            
             {/* Current Price */}
             {currentPrice && (
               <div className="flex items-center gap-2">

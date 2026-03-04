@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, useRef, useMemo } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { useCryptoStore } from "@/stores/crypto-store";
 import { toast } from "sonner";
@@ -67,12 +67,34 @@ export function useTradingHotkeys(options: UseTradingHotkeysOptions = {}) {
     scope = "trading",
   } = options;
 
-  const config = { ...DEFAULT_CONFIG, ...userConfig };
+  // Memoize config to prevent recreating on every render
+  const config = useMemo(() => ({ ...DEFAULT_CONFIG, ...userConfig }), [userConfig]);
+  
   const { activeTab } = useCryptoStore();
   const [lastAction, setLastAction] = useState<HotkeyAction | null>(null);
   const [hotkeysPanelOpen, setHotkeysPanelOpen] = useState(false);
 
   const isActive = config.enabled && (activeTab === "chart" || activeTab === "trading");
+
+  // Use refs for callbacks to avoid re-creating executeAction
+  const onBuyRef = useRef(onBuy);
+  const onSellRef = useRef(onSell);
+  const onCloseAllRef = useRef(onCloseAll);
+  const onCancelOrdersRef = useRef(onCancelOrders);
+  const onRefreshRef = useRef(onRefresh);
+  const onToggleChartRef = useRef(onToggleChart);
+  const onQuickBuyRef = useRef(onQuickBuy);
+  
+  // Update refs when callbacks change
+  useEffect(() => {
+    onBuyRef.current = onBuy;
+    onSellRef.current = onSell;
+    onCloseAllRef.current = onCloseAll;
+    onCancelOrdersRef.current = onCancelOrders;
+    onRefreshRef.current = onRefresh;
+    onToggleChartRef.current = onToggleChart;
+    onQuickBuyRef.current = onQuickBuy;
+  });
 
   const executeAction = useCallback(
     (action: HotkeyAction) => {
@@ -82,37 +104,37 @@ export function useTradingHotkeys(options: UseTradingHotkeysOptions = {}) {
 
       switch (action.type) {
         case "buy":
-          onBuy?.();
+          onBuyRef.current?.();
           toast.success("Buy action triggered", { duration: 1500 });
           break;
         case "sell":
-          onSell?.();
+          onSellRef.current?.();
           toast.success("Sell action triggered", { duration: 1500 });
           break;
         case "closeAll":
-          onCloseAll?.();
+          onCloseAllRef.current?.();
           toast.success("Close all positions triggered", { duration: 1500 });
           break;
         case "cancelOrders":
-          onCancelOrders?.();
+          onCancelOrdersRef.current?.();
           toast.success("Cancel orders triggered", { duration: 1500 });
           break;
         case "refresh":
-          onRefresh?.();
+          onRefreshRef.current?.();
           toast.success("Refresh triggered", { duration: 1500 });
           break;
         case "toggleChart":
-          onToggleChart?.();
+          onToggleChartRef.current?.();
           break;
         case "quickBuy":
           if (action.percent !== undefined) {
-            onQuickBuy?.(action.percent);
+            onQuickBuyRef.current?.(action.percent);
             toast.success(`Quick buy ${action.percent}% triggered`, { duration: 1500 });
           }
           break;
       }
     },
-    [isActive, onBuy, onSell, onCloseAll, onCancelOrders, onRefresh, onToggleChart, onQuickBuy]
+    [isActive]
   );
 
   // Main hotkeys

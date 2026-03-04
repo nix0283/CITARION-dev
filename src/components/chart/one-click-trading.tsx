@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useCallback, useEffect, useRef, useMemo } from "react";
 import { Time, IChartApi, ISeriesApi, MouseEventParams } from "lightweight-charts";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -85,7 +85,8 @@ export function OneClickTradingDialog({
   balance,
   config: userConfig,
 }: OneClickTradingDialogProps) {
-  const config = { ...DEFAULT_CONFIG, ...userConfig };
+  // Memoize config to prevent recreating on every render
+  const config = useMemo(() => ({ ...DEFAULT_CONFIG, ...userConfig }), [userConfig]);
   const [quantity, setQuantity] = useState(params?.quantity || config.defaultQuantity);
   const [orderType, setOrderType] = useState<"MARKET" | "LIMIT">(params?.type || config.defaultType);
   const [limitPrice, setLimitPrice] = useState(params?.price || currentPrice);

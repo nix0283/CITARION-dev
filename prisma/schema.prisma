@@ -27,6 +27,12 @@ model User {
   telegramLinkCode   String?   @unique // One-time code for linking
   telegramLinkExpiry DateTime? // Expiry time for link code
 
+  // Two-Factor Authentication (2FA)
+  twoFactorEnabled    Boolean   @default(false) // Whether 2FA is enabled
+  twoFactorSecret     String?   // Encrypted TOTP secret
+  twoFactorBackupCodes String?   // JSON array of hashed backup codes
+  twoFactorEnabledAt  DateTime? // When 2FA was enabled
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

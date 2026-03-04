@@ -8682,3 +8682,147 @@ Technical Capabilities:
 4. Security audit
 5. Performance monitoring setup
 
+
+---
+Task ID: 22
+Agent: Main
+Task: Implement CIT Audit Fixes Phase 4 (CIT-003, CIT-007, CIT-010, CIT-037)
+
+Work Log:
+- CIT-003: Redis Rate Limiter
+  - Created sliding window algorithm with Lua scripts
+  - Multiple rate limit keys (IP, user, API key, trading, market, webhook)
+  - Graceful fallback to in-memory when Redis unavailable
+  - Middleware helpers for Next.js/Express
+  - Preconfigured instances for different use cases
+- CIT-007: Liquidation Protection
+  - Exchange-specific liquidation price calculation (Binance, Bybit, OKX, Bitget)
+  - Support for isolated and cross margin modes
+  - Tiered margin structures
+  - ATR-based safety buffer validation
+  - Trade rejection for unsafe positions
+  - Risk level scoring (0-100)
+- CIT-010: Order Timeout Service
+  - Track pending orders with expiration times
+  - Background process with configurable check interval (default 30s)
+  - Automatic order cancellation after TTL (default 60s)
+  - Custom TTL per order type (market, limit, stop, trailing)
+  - Callbacks for timeout, cancellation, error events
+  - Full metrics tracking
+- CIT-037: Graceful Shutdown
+  - Register shutdown handlers with priority levels
+  - Handle SIGTERM, SIGINT, SIGHUP signals
+  - Timeout-based forced shutdown (default 30s)
+  - Handler categories: bot_stopper, position_closer, connection_closer, state_saver, cleanup
+  - Progress tracking and logging
+
+Stage Summary:
+- 4 critical security/infrastructure modules implemented
+- ~4000+ lines of new code
+- All modules pushed to GitHub (commit f713fb9)
+- Redis dependency added (redis@5.11.0)
+
+Files Created:
+- `/src/lib/rate-limiter-redis.ts`
+- `/src/lib/rate-limiter/index.ts`
+- `/src/lib/risk-management/liquidation-protection.ts`
+- `/src/lib/order-timeout-service.ts`
+- `/src/lib/order-timeout/index.ts`
+- `/src/lib/graceful-shutdown.ts`
+- `/src/lib/graceful-shutdown/index.ts`
+
+Files Modified:
+- `/src/lib/risk-management/index.ts` - Added liquidation protection exports
+- `/package.json` - Added redis dependency
+
+---
+Task ID: 23
+Agent: Main
+Task: Implement Priority 2 Audit Fixes (CIT-006, CIT-012, CIT-013, CIT-014)
+
+Work Log:
+- CIT-006: Two-Factor Authentication (2FA)
+  - Created `/src/lib/auth/two-factor-auth.ts` - Complete TOTP implementation
+  - TOTP generation using RFC 6238 standard (SHA-1, SHA-256, SHA-512)
+  - QR code generation for authenticator apps
+  - Backup codes with SHA-256 hashing
+  - Rate limiting for failed attempts (5 attempts, 15-minute lockout)
+  - AES-256-GCM encryption for secret storage
+  - Trusted device token support
+  - Compatible with Google Authenticator, Authy, etc.
+  - Created `/src/app/api/auth/2fa/route.ts` - API endpoints
+  - Added 2FA fields to User model in Prisma schema:
+    - twoFactorEnabled: Boolean
+    - twoFactorSecret: String?
+    - twoFactorBackupCodes: String?
+    - twoFactorEnabledAt: DateTime?
+  - Pushed schema changes to database
+
+- CIT-012: Double Entry Protection
+  - Created `/src/lib/protection/double-entry-protection.ts`
+  - 5 layers of protection:
+    1. Signal Fingerprinting - SHA-256 hash of signal parameters
+    2. Symbol+Direction Lock - Prevents same symbol/direction within cooldown (60s)
+    3. Price Zone Protection - 0.5% threshold for price overlap
+    4. Time-based Deduplication - 5-minute window for similar signals
+    5. Cross-Bot Coordination - Ensures only one bot trades per symbol
+  - Daily entry limit (20 entries per symbol per day)
+  - Fuzzy matching for similar signals (85% threshold)
+  - Created `/src/lib/protection/index.ts` - Module exports
+
+- CIT-013: ML Signal Filter Enhancement with Backtesting Integration
+  - Created `/src/lib/ml/ml-signal-filter-enhancement.ts`
+  - Integration with existing ML Signal Filter
+  - Historical performance correlation
+  - Win rate prediction based on similar trades
+  - Expected value calculation in R-multiples
+  - Risk-adjusted confidence scoring
+  - Backtest-based recommendations (STRONG_BUY, BUY, HOLD, AVOID, STRONG_AVOID)
+  - Auto-updates ML classifier from performance data
+  - Stores validation records for learning
+  - Recency weighting for recent trades
+
+- CIT-014: Position Size Validator
+  - Created `/src/lib/risk-management/position-size-validator.ts`
+  - 5 sizing methods:
+    1. Fixed Fractional - Fixed % risk per trade (default 2%)
+    2. Kelly Criterion - Mathematically optimal sizing (half Kelly)
+    3. Volatility-Adjusted - ATR-based adjustment
+    4. Risk Parity - Equal risk contribution
+    5. Fixed Amount - Custom risk amount
+  - Validation against:
+    - Account balance limits
+    - Exchange minimum/maximum order sizes
+    - Leverage limits (up to 125x per exchange)
+    - Maximum position count (10)
+    - Maximum total exposure (50%)
+    - Risk-reward ratio (minimum 1.5)
+  - Exchange-specific limits for Binance, Bybit, OKX, Bitget, BingX
+  - Helper functions for quick calculations
+
+Stage Summary:
+- 4 Priority 2 audit items implemented
+- ~2000 lines of new production code
+- All modules follow existing project patterns
+- Database schema updated for 2FA support
+- All code passes lint checks (only pre-existing warnings remain)
+
+Files Created:
+- `/src/lib/auth/two-factor-auth.ts` - TOTP implementation
+- `/src/app/api/auth/2fa/route.ts` - 2FA API endpoints
+- `/src/lib/protection/double-entry-protection.ts` - Entry protection
+- `/src/lib/protection/index.ts` - Module exports
+- `/src/lib/ml/ml-signal-filter-enhancement.ts` - Backtest integration
+- `/src/lib/risk-management/position-size-validator.ts` - Position sizing
+
+Files Modified:
+- `/prisma/schema.prisma` - Added 2FA fields to User model
+
+Key Features Delivered:
+1. **2FA System**: Complete TOTP with backup codes, rate limiting, encryption
+2. **Double Entry Protection**: 5-layer defense against duplicate entries
+3. **ML Enhancement**: Backtest-based signal validation
+4. **Position Sizing**: 5 risk-based sizing methods with validation
+
+---
+*End of Priority 2 Implementation Session*

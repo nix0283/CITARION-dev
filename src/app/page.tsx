@@ -1,7 +1,7 @@
 "use client";
 
 // CITARION Trading Dashboard - Refresh Build
-import { useState, useMemo } from "react";
+import { useState, useMemo, useSyncExternalStore } from "react";
 import { Sidebar } from "@/components/layout/sidebar";
 import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
@@ -135,6 +135,48 @@ const formatCurrency = (value: number) =>
 
 const formatPercent = (value: number) =>
   `${value >= 0 ? "+" : ""}${value.toFixed(2)}%`;
+
+// Hook to track if component is mounted (prevents hydration mismatch)
+// Using useSyncExternalStore is the recommended React 18+ pattern
+const emptySubscribe = () => () => {};
+
+function useMounted() {
+  return useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false
+  );
+}
+
+// Component to safely render time-dependent content
+function TimeAgo({ date }: { date: Date }) {
+  const mounted = useMounted();
+  
+  if (!mounted) {
+    return <span>-</span>;
+  }
+  
+  const now = new Date();
+  const diff = now.getTime() - date.getTime();
+  const minutes = Math.floor(diff / 60000);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+
+  if (days > 0) return <span>{days}d ago</span>;
+  if (hours > 0) return <span>{hours}h ago</span>;
+  return <span>{minutes}m ago</span>;
+}
+
+// Component to safely render current time
+function CurrentTime({ date }: { date: Date | null }) {
+  const mounted = useMounted();
+  
+  if (!mounted || !date) {
+    return <span>-</span>;
+  }
+  
+  return <span>{date.toLocaleTimeString()}</span>;
+}
 
 const formatTime = (date: Date) => {
   const now = new Date();
@@ -357,7 +399,7 @@ function ConnectionStatusBar({ btcPrice, connectionStatus, lastUpdated, exchange
           </div>
 
           <div className="text-xs text-muted-foreground">
-            {lastUpdated && lastUpdated.toLocaleTimeString()}
+            <CurrentTime date={lastUpdated} />
           </div>
         </div>
       </div>
@@ -379,11 +421,9 @@ function ConnectionStatusBar({ btcPrice, connectionStatus, lastUpdated, exchange
               </div>
             )}
           </div>
-          {lastUpdated && (
-            <span className="text-[10px] text-muted-foreground">
-              {lastUpdated.toLocaleTimeString()}
-            </span>
-          )}
+          <span className="text-[10px] text-muted-foreground">
+            <CurrentTime date={lastUpdated} />
+          </span>
         </div>
       </div>
     </>
@@ -597,7 +637,7 @@ function DashboardView() {
                     {formatCurrency(demoJournalEntries[0].pnl)}
                   </span>
                   <span className="text-muted-foreground">•</span>
-                  <span className="text-muted-foreground">{formatTime(demoJournalEntries[0].date)}</span>
+                  <span className="text-muted-foreground"><TimeAgo date={demoJournalEntries[0].date} /></span>
                 </div>
               </div>
             )}
@@ -863,7 +903,7 @@ function TradesView({ trades }: TradesViewProps) {
               <tbody>
                 {trades.map((trade) => (
                   <tr key={trade.id} className="border-b border-border/50 hover:bg-muted/30">
-                    <td className="p-3 text-xs text-muted-foreground">{formatTime(trade.timestamp)}</td>
+                    <td className="p-3 text-xs text-muted-foreground"><TimeAgo date={trade.timestamp} /></td>
                     <td className="p-3 font-medium text-sm">{trade.symbol}</td>
                     <td className="p-3">
                       <Badge
@@ -1610,7 +1650,7 @@ function PortfolioView({ balances }: PortfolioViewProps) {
               <div className="flex items-center justify-between text-xs text-muted-foreground pt-2 border-t border-border">
                 <div className="flex items-center gap-1">
                   <Clock className="h-3 w-3" />
-                  <span>Sync: {formatTime(exchange.lastSync)}</span>
+                  <span>Sync: <TimeAgo date={exchange.lastSync} /></span>
                 </div>
                 <div className="flex items-center gap-1">
                   {exchange.permissions.includes("trade") ? (
@@ -1896,7 +1936,7 @@ function NewsView({ news, events }: NewsViewProps) {
                         </Badge>
                         <span className="text-xs text-muted-foreground">{item.source}</span>
                         <span className="text-xs text-muted-foreground">•</span>
-                        <span className="text-xs text-muted-foreground">{formatTime(item.timestamp)}</span>
+                        <span className="text-xs text-muted-foreground"><TimeAgo date={item.timestamp} /></span>
                       </div>
                       <h3 className="font-medium text-sm mb-1 line-clamp-2">{item.title}</h3>
                       <p className="text-xs text-muted-foreground line-clamp-2">{item.summary}</p>

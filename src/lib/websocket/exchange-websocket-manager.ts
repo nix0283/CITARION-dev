@@ -862,17 +862,128 @@ export class ExchangeWebSocketManager extends EventEmitter {
 
   // ==================== PING/PONG ====================
 
+  // Audit Fix: P3.17 - WebSocket Heartbeat/Ping-Pong Mechanism
+  private lastPongReceived: Map<string, number> = new Map();
+  private pongTimeoutIntervals: Map<string, NodeJS.Timeout> = new Map();
+  private heartbeatTimeout: number = 60000; // 60 seconds without pong = reconnect
+  private heartbeatInterval: number = 25000; // 25 seconds between pings
+
   private startPing(key: string, ws: WebSocket, exchange: string): void {
     const pingInterval = this.getPingInterval(exchange);
     
+    // Initialize last pong time
+    this.lastPongReceived.set(key, Date.now());
+
     const interval = setInterval(() => {
       if (ws.readyState === WebSocket.OPEN) {
         const pingMsg = this.getPingMessage(exchange);
         ws.send(pingMsg);
+        
+        // Start pong timeout check
+        this.startPongTimeout(key, ws, exchange);
       }
     }, pingInterval);
 
     this.pingIntervals.set(key, interval);
+    
+    // Listen for pong responses
+    ws.on('pong', () => {
+      this.handlePong(key);
+    });
+    
+    // For exchanges that send pong as data message
+    ws.on('message', (data: Buffer) => {
+      this.checkPongMessage(key, data, exchange);
+    });
+  }
+
+  /**
+   * Start timeout for pong response
+   * Audit Fix: P3.17 - Reconnect if no pong received within timeout
+   */
+  private startPongTimeout(key: string, ws: WebSocket, exchange: string): void {
+    // Clear existing timeout
+    this.clearPongTimeout(key);
+    
+    const timeout = setTimeout(() => {
+      const lastPong = this.lastPongReceived.get(key) || 0;
+      const elapsed = Date.now() - lastPong;
+      
+      if (elapsed > this.heartbeatTimeout) {
+        console.warn(`[WS] No pong received for ${elapsed}ms, reconnecting ${key}`);
+        
+        // Terminate and reconnect
+        if (ws.readyState === WebSocket.OPEN) {
+          ws.terminate();
+        }
+        
+        const config = this.configs.get(key);
+        if (config) {
+          this.handleReconnect(config);
+        }
+      }
+    }, this.heartbeatTimeout);
+    
+    this.pongTimeoutIntervals.set(key, timeout);
+  }
+
+  /**
+   * Clear pong timeout
+   */
+  private clearPongTimeout(key: string): void {
+    const timeout = this.pongTimeoutIntervals.get(key);
+    if (timeout) {
+      clearTimeout(timeout);
+      this.pongTimeoutIntervals.delete(key);
+    }
+  }
+
+  /**
+   * Handle pong response
+   */
+  private handlePong(key: string): void {
+    this.lastPongReceived.set(key, Date.now());
+    this.clearPongTimeout(key);
+  }
+
+  /**
+   * Check if message is a pong response (exchange-specific)
+   */
+  private checkPongMessage(key: string, data: Buffer, exchange: string): void {
+    try {
+      const msg = data.toString();
+      
+      // Check for pong messages from different exchanges
+      switch (exchange.toLowerCase()) {
+        case 'binance':
+          if (msg === 'pong' || msg.includes('"method":"pong"')) {
+            this.handlePong(key);
+          }
+          break;
+        case 'bybit':
+          if (msg.includes('"op":"pong"') || msg.includes('"ret_msg":"pong"')) {
+            this.handlePong(key);
+          }
+          break;
+        case 'okx':
+          if (msg === 'pong') {
+            this.handlePong(key);
+          }
+          break;
+        case 'bitget':
+          if (msg.includes('"op":"pong"')) {
+            this.handlePong(key);
+          }
+          break;
+        case 'bingx':
+          if (msg.includes('pong') || msg.includes('ping')) {
+            this.handlePong(key);
+          }
+          break;
+      }
+    } catch (error) {
+      // Ignore parse errors
+    }
   }
 
   private stopPing(key: string): void {
@@ -881,6 +992,27 @@ export class ExchangeWebSocketManager extends EventEmitter {
       clearInterval(interval);
       this.pingIntervals.delete(key);
     }
+    
+    this.clearPongTimeout(key);
+    this.lastPongReceived.delete(key);
+  }
+
+  /**
+   * Get connection health status based on heartbeat
+   */
+  getConnectionHealth(key: string): {
+    lastPong: number | null;
+    timeSinceLastPong: number;
+    isHealthy: boolean;
+  } {
+    const lastPong = this.lastPongReceived.get(key);
+    const timeSinceLastPong = lastPong ? Date.now() - lastPong : Infinity;
+    
+    return {
+      lastPong: lastPong || null,
+      timeSinceLastPong,
+      isHealthy: timeSinceLastPong < this.heartbeatTimeout,
+    };
   }
 
   private getPingInterval(exchange: string): number {

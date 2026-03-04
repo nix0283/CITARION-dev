@@ -488,7 +488,7 @@ export class GracefulShutdown {
       await Promise.race([
         handler.handler(),
         new Promise<never>((_, reject) => {
-          setTimeout(() => reject(new Error(`Handler timeout (${handlerTimeout}ms)`), handlerTimeout);
+          setTimeout(() => reject(new Error(`Handler timeout (${handlerTimeout}ms)`)), handlerTimeout);
         }),
       ]);
 

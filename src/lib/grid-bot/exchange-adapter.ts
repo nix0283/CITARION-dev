@@ -124,7 +124,7 @@ export class GridBotExchangeAdapter extends EventEmitter implements GridBotAdapt
    */
   private async startWebSocket(): Promise<void> {
     try {
-      const io = require('socket.io-client');
+      const { io } = await import('socket.io-client');
       
       // Connect to our price service
       this.wsConnection = io('/?XTransformPort=3002');

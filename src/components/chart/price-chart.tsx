@@ -16,6 +16,8 @@ import {
   RotateCcw,
   BarChart3,
   Loader2,
+  Keyboard,
+  MousePointer2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
@@ -37,6 +39,9 @@ import {
 import { IndicatorsPanel } from "@/components/indicators/indicators-panel";
 import { calculateIndicator, type Candle } from "@/lib/indicators/calculator";
 import type { BuiltInIndicator } from "@/lib/indicators/builtin";
+import { useTradingHotkeys, HOTKEYS_HELP } from "@/hooks/use-trading-hotkeys";
+import { OneClickTradingDialog, type OneClickTradeParams, type OneClickTradingConfig } from "@/components/chart/one-click-trading";
+import { useOrderMarkers, type OrderMarker, type ProcessedMarker } from "@/components/chart/order-markers";
 
 // Timeframes
 const TIMEFRAMES = [
@@ -218,6 +223,57 @@ export function PriceChart() {
   const [showTooltip, setShowTooltip] = useState(false);
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
 
+  // CIT-043: Hotkeys state
+  const [showHotkeysHelp, setShowHotkeysHelp] = useState(false);
+
+  // CIT-044: Order markers state
+  const [orders, setOrders] = useState<OrderMarker[]>([]);
+  const [showOrderMarkers, setShowOrderMarkers] = useState(true);
+  const processedMarkers = useOrderMarkers(orders, { showPending: true, showFilled: true });
+
+  // CIT-049: One-click trading state
+  const [oneClickEnabled, setOneClickEnabled] = useState(false);
+  const [oneClickDialogOpen, setOneClickDialogOpen] = useState(false);
+  const [oneClickParams, setOneClickParams] = useState<OneClickTradeParams | null>(null);
+  const oneClickConfig: OneClickTradingConfig = {
+    enabled: oneClickEnabled,
+    defaultQuantity: 0.001,
+    defaultType: "MARKET",
+    slippageTolerance: 0.5,
+    showConfirmation: true,
+    quickSizes: [1, 5, 10, 25, 50, 100],
+  };
+
+  // CIT-043: Setup hotkeys
+  useTradingHotkeys({
+    onBuy: () => {
+      if (currentPrice) {
+        setOneClickParams({
+          symbol,
+          side: "BUY",
+          price: currentPrice,
+          quantity: 0.001,
+          type: "MARKET",
+        });
+        setOneClickDialogOpen(true);
+      }
+    },
+    onSell: () => {
+      if (currentPrice) {
+        setOneClickParams({
+          symbol,
+          side: "SELL",
+          price: currentPrice,
+          quantity: 0.001,
+          type: "MARKET",
+        });
+        setOneClickDialogOpen(true);
+      }
+    },
+    onRefresh: () => handleRefresh(),
+    config: { enabled: true },
+  });
+
   // Split indicators into overlay and pane
   const { overlayIndicators, paneIndicators } = useMemo(() => {
     const overlay: IndicatorConfig[] = [];
@@ -286,14 +342,12 @@ export function PriceChart() {
           borderColor: "#2a2e39",
           timeVisible: true,
         },
-        // Configure panes - pane 0 is main (price), pane 1 is for oscillators
         panes: hasPaneIndicators ? [
-          { height: 0.7 },  // 70% for price chart
-          { height: 0.3 },  // 30% for oscillator
+          { height: 0.7 },
+          { height: 0.3 },
         ] : [
-          { height: 1.0 },  // 100% when no pane indicators
+          { height: 1.0 },
         ],
-        // Pane separator styling
         paneSeparator: {
           color: "#2a2e39",
           hoverColor: "#4c525e",
@@ -353,7 +407,6 @@ export function PriceChart() {
         if (candleData && 'open' in candleData) {
           const indicators: TooltipData['indicators'] = [];
           
-          // Get indicator values at current time
           overlaySeriesRef.current.forEach((seriesArr, id) => {
             seriesArr.forEach((s) => {
               const data = param.seriesData.get(s);
@@ -400,6 +453,25 @@ export function PriceChart() {
         }
       });
       
+      // CIT-049: One-click trading click handler
+      if (oneClickEnabled) {
+        chart.subscribeClick((param) => {
+          if (!param.point || !param.time) return;
+
+          const price = param.point.y;
+          const suggestedSide: "BUY" | "SELL" = price < (currentPrice || 0) ? "BUY" : "SELL";
+
+          setOneClickParams({
+            symbol,
+            side: suggestedSide,
+            price: price,
+            quantity: 0.001,
+            type: "MARKET",
+          });
+          setOneClickDialogOpen(true);
+        });
+      }
+      
       // Chart is ready
       setIsChartReady(true);
     };
@@ -430,22 +502,7 @@ export function PriceChart() {
         chartRef.current = null;
       }
     };
-  }, [hasPaneIndicators, activeIndicators]);
-
-  // Update panes configuration when indicators change
-  // Note: 'panes' option may not be available in current lightweight-charts version
-  // useEffect(() => {
-  //   if (!chartRef.current || !isChartReady) return;
-
-  //   chartRef.current.applyOptions({
-  //     panes: hasPaneIndicators ? [
-  //       { height: 0.7 },
-  //       { height: 0.3 },
-  //     ] : [
-  //       { height: 1.0 },
-  //     ],
-  //   });
-  // }, [hasPaneIndicators, isChartReady]);
+  }, [hasPaneIndicators, activeIndicators, oneClickEnabled, currentPrice, symbol]);
 
   // Fetch data on mount and when symbol/timeframe changes
   useEffect(() => {
@@ -535,6 +592,17 @@ export function PriceChart() {
     if (candleSeriesRef.current) {
       try {
         candleSeriesRef.current.setData(candleData);
+        
+        // CIT-044: Set order markers on candlestick series
+        if (showOrderMarkers && processedMarkers.length > 0 && 'setMarkers' in candleSeriesRef.current) {
+          (candleSeriesRef.current as any).setMarkers(processedMarkers.map(m => ({
+            time: m.time,
+            position: m.position,
+            color: m.color,
+            shape: m.shape,
+            text: m.text,
+          })));
+        }
       } catch (e) {
         console.error('Error setting candlestick data:', e);
       }
@@ -559,7 +627,7 @@ export function PriceChart() {
     } catch (e) {
       console.error('Error fitting content:', e);
     }
-  }, [candles, showVolume, isChartReady]);
+  }, [candles, showVolume, isChartReady, processedMarkers, showOrderMarkers]);
 
   // Render overlay indicators on main chart (pane 0)
   useEffect(() => {
@@ -567,7 +635,6 @@ export function PriceChart() {
 
     const chart = chartRef.current;
 
-    // Validate candle data
     const validCandles = candles.filter(c => 
       c && 
       typeof c.time !== 'undefined' &&
@@ -579,10 +646,8 @@ export function PriceChart() {
     
     if (validCandles.length === 0) return;
 
-    // Track active indicator IDs
     const activeIndicatorIds = new Set(overlayIndicators.map(c => c.id));
     
-    // Remove series only for indicators that are no longer active
     overlaySeriesRef.current.forEach((series, id) => {
       if (!activeIndicatorIds.has(id)) {
         series.forEach((s) => {
@@ -594,9 +659,7 @@ export function PriceChart() {
       }
     });
 
-    // Add new indicator series
     overlayIndicators.forEach((config) => {
-      // Skip if series already exist for this indicator
       if (overlaySeriesRef.current.has(config.id)) {
         return;
       }
@@ -609,14 +672,10 @@ export function PriceChart() {
         return;
       }
       
-      if (!result) {
-        console.warn('No result for indicator:', config.indicator.id);
-        return;
-      }
+      if (!result) return;
 
       const series: ISeriesApi<"Line" | "Histogram">[] = [];
 
-      // Validate and add line series
       if (result.lines && Array.isArray(result.lines)) {
         result.lines.forEach((line) => {
           if (!line || !line.data || !Array.isArray(line.data) || line.data.length === 0) return;
@@ -626,16 +685,13 @@ export function PriceChart() {
               lineWidth: 1,
               priceLineVisible: false,
               lastValueVisible: false,
-            }, 0); // pane 0 - main chart
+            }, 0);
             lineSeries.setData(line.data as LineData<Time>[]);
             series.push(lineSeries);
-          } catch (e) {
-            console.error('Error adding line series:', e);
-          }
+          } catch (e) {}
         });
       }
 
-      // Validate and add histogram series
       if (result.histograms && Array.isArray(result.histograms)) {
         result.histograms.forEach((hist) => {
           if (!hist || !hist.data || !Array.isArray(hist.data) || hist.data.length === 0) return;
@@ -643,12 +699,10 @@ export function PriceChart() {
             const histSeries = chart.addSeries(HistogramSeries, {
               priceLineVisible: false,
               lastValueVisible: false,
-            }, 0); // pane 0 - main chart
+            }, 0);
             histSeries.setData(hist.data as HistogramData<Time>[]);
             series.push(histSeries);
-          } catch (e) {
-            console.error('Error adding histogram series:', e);
-          }
+          } catch (e) {}
         });
       }
 
@@ -665,7 +719,6 @@ export function PriceChart() {
 
     const chart = chartRef.current;
 
-    // Validate candle data
     const validCandles = candles.filter(c => 
       c && 
       typeof c.time !== 'undefined' &&
@@ -677,10 +730,8 @@ export function PriceChart() {
     
     if (validCandles.length === 0) return;
 
-    // Track active pane indicator IDs
     const activePaneIndicatorIds = new Set(paneIndicators.map(c => c.id));
 
-    // Remove old price lines only for indicators no longer active
     priceLinesRef.current.forEach((lines, id) => {
       if (!activePaneIndicatorIds.has(id)) {
         lines.forEach((line) => {
@@ -692,7 +743,6 @@ export function PriceChart() {
       }
     });
 
-    // Remove old pane indicator series only for indicators no longer active
     paneSeriesRef.current.forEach((series, id) => {
       if (!activePaneIndicatorIds.has(id)) {
         series.forEach((s) => {
@@ -704,12 +754,8 @@ export function PriceChart() {
       }
     });
 
-    // Add new indicator series in pane 1
     paneIndicators.forEach((config) => {
-      // Skip if series already exist for this indicator
-      if (paneSeriesRef.current.has(config.id)) {
-        return;
-      }
+      if (paneSeriesRef.current.has(config.id)) return;
 
       let result;
       try {
@@ -719,16 +765,12 @@ export function PriceChart() {
         return;
       }
       
-      if (!result) {
-        console.warn('No result for pane indicator:', config.indicator.id);
-        return;
-      }
+      if (!result) return;
 
       const series: ISeriesApi<"Line" | "Histogram">[] = [];
-      const paneIndex = 1; // All pane indicators go to pane 1
+      const paneIndex = 1;
       const priceScaleId = `pane-scale-${config.id}`;
 
-      // Validate and add line series
       if (result.lines && Array.isArray(result.lines)) {
         result.lines.forEach((line, idx) => {
           if (!line || !line.data || !Array.isArray(line.data) || line.data.length === 0) return;
@@ -742,13 +784,10 @@ export function PriceChart() {
             }, paneIndex);
             lineSeries.setData(line.data as LineData<Time>[]);
             series.push(lineSeries);
-          } catch (e) {
-            console.error('Error adding pane line series:', e);
-          }
+          } catch (e) {}
         });
       }
 
-      // Validate and add histogram series
       if (result.histograms && Array.isArray(result.histograms)) {
         result.histograms.forEach((hist) => {
           if (!hist || !hist.data || !Array.isArray(hist.data) || hist.data.length === 0) return;
@@ -760,29 +799,23 @@ export function PriceChart() {
             }, paneIndex);
             histSeries.setData(hist.data as HistogramData<Time>[]);
             series.push(histSeries);
-          } catch (e) {
-            console.error('Error adding pane histogram series:', e);
-          }
+          } catch (e) {}
         });
       }
 
       if (series.length > 0) {
         paneSeriesRef.current.set(config.id, series);
 
-        // Configure price scale for specific indicators
         if (config.indicator.id === 'rsi') {
-          // Fixed scale 0-100 for RSI
           chart.priceScale(priceScaleId).applyOptions({
             autoScale: false,
             scaleMargins: { top: 0.1, bottom: 0.1 },
           });
 
-          // Add horizontal lines at 70 and 30 for RSI
           const priceLines: any[] = [];
-          const mainSeries = series[0]; // First line series
+          const mainSeries = series[0];
           
           if (mainSeries && 'createPriceLine' in mainSeries) {
-            // Overbought level (70)
             const overboughtLine = mainSeries.createPriceLine({
               price: 70,
               color: 'rgba(239, 83, 80, 0.5)',
@@ -793,7 +826,6 @@ export function PriceChart() {
             });
             priceLines.push(overboughtLine);
 
-            // Oversold level (30)
             const oversoldLine = mainSeries.createPriceLine({
               price: 30,
               color: 'rgba(38, 166, 154, 0.5)',
@@ -804,7 +836,6 @@ export function PriceChart() {
             });
             priceLines.push(oversoldLine);
 
-            // Middle level (50)
             const middleLine = mainSeries.createPriceLine({
               price: 50,
               color: 'rgba(255, 255, 255, 0.2)',
@@ -819,7 +850,6 @@ export function PriceChart() {
           priceLinesRef.current.set(config.id, priceLines);
         }
         
-        // MACD zero line
         if (config.indicator.id === 'macd') {
           const mainSeries = series[0];
           if (mainSeries && 'createPriceLine' in mainSeries) {
@@ -867,6 +897,27 @@ export function PriceChart() {
     setActiveIndicators(indicators);
   }, []);
 
+  // CIT-049: Handle one-click trade confirmation
+  const handleOneClickTradeConfirm = useCallback(async (params: OneClickTradeParams) => {
+    console.log("One-click trade:", params);
+    // In real implementation, this would call the trading API
+    // For demo, we just add to orders
+    const newOrder: OrderMarker = {
+      id: `order-${Date.now()}`,
+      time: Math.floor(Date.now() / 1000),
+      price: params.price,
+      side: params.side,
+      type: params.type,
+      status: "FILLED",
+      quantity: params.quantity,
+      filledQuantity: params.quantity,
+      avgPrice: params.price,
+      symbol: params.symbol,
+      createdAt: Date.now(),
+    };
+    setOrders(prev => [...prev, newOrder]);
+  }, []);
+
   // Build legend items
   const legendItems = useMemo(() => {
     const items: Array<{ color: string; label: string }> = [];
@@ -893,7 +944,7 @@ export function PriceChart() {
           <div className="flex items-center gap-3">
             {/* Symbol Selector */}
             <Select value={symbol} onValueChange={setSymbol}>
-              <SelectTrigger className="w-[140px] h-8">
+              <SelectTrigger className="w-[140px] h-8" data-testid="symbol-selector">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -906,7 +957,7 @@ export function PriceChart() {
             </Select>
 
             {/* Timeframe Selector */}
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1" data-testid="timeframe-selector">
               {TIMEFRAMES.map((tf) => (
                 <Button
                   key={tf.id}
@@ -914,6 +965,8 @@ export function PriceChart() {
                   size="sm"
                   className="h-7 px-2 text-xs"
                   onClick={() => setTimeframe(tf.id)}
+                  data-testid={`timeframe-${tf.id}`}
+                  data-active={timeframe === tf.id}
                 >
                   {tf.label}
                 </Button>
@@ -926,9 +979,22 @@ export function PriceChart() {
               size="sm"
               className="h-7 px-2 text-xs"
               onClick={() => setShowVolume(!showVolume)}
+              data-testid="toggle-volume"
             >
               <BarChart3 className="h-3 w-3 mr-1" />
               Vol
+            </Button>
+
+            {/* CIT-049: One-Click Trading Toggle */}
+            <Button
+              variant={oneClickEnabled ? "default" : "outline"}
+              size="sm"
+              className="h-7 px-2 text-xs"
+              onClick={() => setOneClickEnabled(!oneClickEnabled)}
+              data-testid="toggle-one-click"
+            >
+              <MousePointer2 className="h-3 w-3 mr-1" />
+              1-Click
             </Button>
           </div>
 
@@ -958,6 +1024,17 @@ export function PriceChart() {
               </div>
             )}
 
+            {/* CIT-043: Hotkeys Help */}
+            <Button
+              variant="outline"
+              size="sm"
+              className="h-8"
+              onClick={() => setShowHotkeysHelp(!showHotkeysHelp)}
+              data-testid="hotkeys-help-button"
+            >
+              <Keyboard className="h-4 w-4" />
+            </Button>
+
             {/* Refresh Button */}
             <Button
               variant="outline"
@@ -965,6 +1042,7 @@ export function PriceChart() {
               className="h-8"
               onClick={handleRefresh}
               disabled={isLoading}
+              data-testid="refresh-chart"
             >
               <RotateCcw
                 className={cn("h-4 w-4", isLoading && "animate-spin")}
@@ -977,19 +1055,21 @@ export function PriceChart() {
               size="sm"
               className="h-8"
               onClick={() => setShowIndicatorsPanel(!showIndicatorsPanel)}
+              data-testid="toggle-indicators"
             >
               <BarChart3 className="h-4 w-4" />
             </Button>
           </div>
         </div>
 
-        {/* Chart Container - Single chart with panes */}
+        {/* Chart Container */}
         <div
           ref={chartContainerRef}
           className={cn(
             "relative flex-1 hide-tv-logo min-h-[400px]",
             (isLoading || !isChartReady || candles.length === 0) && "pointer-events-none"
           )}
+          data-testid="price-chart"
         >
           {(isLoading || !isChartReady || candles.length === 0) && (
             <div className="absolute inset-0 flex items-center justify-center bg-[#131722] z-10">
@@ -1017,7 +1097,6 @@ export function PriceChart() {
                 {formatTime(tooltip.time)}
               </div>
               
-              {/* OHLCV */}
               <div className="grid grid-cols-2 gap-x-4 gap-y-1 mb-2">
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Open:</span>
@@ -1043,7 +1122,6 @@ export function PriceChart() {
                 </div>
               </div>
               
-              {/* Indicators */}
               {tooltip.indicators.length > 0 && (
                 <div className="border-t border-[#2a2e39] pt-2 mt-1">
                   <div className="text-muted-foreground mb-1 font-medium">Индикаторы:</div>
@@ -1058,6 +1136,34 @@ export function PriceChart() {
                   ))}
                 </div>
               )}
+            </div>
+          )}
+
+          {/* CIT-043: Hotkeys Help Panel */}
+          {showHotkeysHelp && (
+            <div 
+              className="absolute top-2 right-2 z-30 bg-[#1e222d]/95 border border-[#2a2e39] rounded-md p-3 text-xs shadow-lg"
+              data-testid="hotkeys-help"
+            >
+              <div className="flex justify-between items-center mb-2">
+                <span className="font-medium">Hotkeys</span>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="h-5 w-5 p-0"
+                  onClick={() => setShowHotkeysHelp(false)}
+                >
+                  ×
+                </Button>
+              </div>
+              <div className="space-y-1">
+                {HOTKEYS_HELP.map((hk, i) => (
+                  <div key={i} className="flex justify-between gap-4">
+                    <kbd className="px-1.5 py-0.5 bg-muted rounded text-[10px] font-mono">{hk.key}</kbd>
+                    <span className="text-muted-foreground">{hk.description}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
         </div>
@@ -1088,6 +1194,16 @@ export function PriceChart() {
         </div>
       )}
 
+      {/* CIT-049: One-Click Trading Dialog */}
+      <OneClickTradingDialog
+        open={oneClickDialogOpen}
+        onOpenChange={setOneClickDialogOpen}
+        params={oneClickParams}
+        onConfirm={handleOneClickTradeConfirm}
+        currentPrice={currentPrice || 0}
+        balance={10000}
+        config={oneClickConfig}
+      />
     </div>
   );
 }

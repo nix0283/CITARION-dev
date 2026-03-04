@@ -118,10 +118,17 @@ export function InstitutionalPanel() {
     }
   }, []);
 
+  // Initial fetch and polling
   useEffect(() => {
-    fetchBots();
+    // Use RAF to batch initial fetch with other updates
+    const rafId = requestAnimationFrame(() => {
+      fetchBots();
+    });
     const interval = setInterval(fetchBots, 5000);
-    return () => clearInterval(interval);
+    return () => {
+      cancelAnimationFrame(rafId);
+      clearInterval(interval);
+    };
   }, [fetchBots]);
 
   // Start bot

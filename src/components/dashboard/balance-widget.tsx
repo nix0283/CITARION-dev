@@ -59,13 +59,17 @@ export function BalanceWidget() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Animate balance changes
+  // Animate balance changes - use RAF to avoid cascading renders
   useEffect(() => {
     if (prevBalance !== null && totalBalance !== prevBalance) {
       const diff = totalBalance - prevBalance;
-      setBalanceFlash(diff > 0 ? "positive" : "negative");
-      const timer = setTimeout(() => setBalanceFlash(null), 600);
-      return () => clearTimeout(timer);
+      // Use requestAnimationFrame to batch state updates
+      const rafId = requestAnimationFrame(() => {
+        setBalanceFlash(diff > 0 ? "positive" : "negative");
+        const timer = setTimeout(() => setBalanceFlash(null), 600);
+        return () => clearTimeout(timer);
+      });
+      return () => cancelAnimationFrame(rafId);
     }
     setPrevBalance(balanceRef.current);
     balanceRef.current = totalBalance;

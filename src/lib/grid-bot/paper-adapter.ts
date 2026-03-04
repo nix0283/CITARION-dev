@@ -133,7 +133,7 @@ export class GridBotPaperAdapter extends EventEmitter implements GridBotAdapter 
   private async startPriceUpdates(): Promise<void> {
     // Try WebSocket first
     try {
-      const io = require('socket.io-client');
+      const { io } = await import('socket.io-client');
       
       this.wsConnection = io('/?XTransformPort=3002');
       

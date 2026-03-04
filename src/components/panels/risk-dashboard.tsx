@@ -62,20 +62,23 @@ interface PositionRisk {
   liquidationPrice: number | null;
 }
 
+// Default metrics for initialization
+const DEFAULT_METRICS: RiskMetrics = {
+  totalExposure: 0,
+  maxExposure: 100000,
+  currentDrawdown: 0,
+  maxDrawdown: 20,
+  leverage: 1,
+  maxLeverage: 10,
+  openPositions: 0,
+  maxPositions: 10,
+  dailyPnL: 0,
+  dailyLossLimit: 5,
+};
+
 export function RiskDashboard() {
   const [loading, setLoading] = useState(true);
-  const [metrics, setMetrics] = useState<RiskMetrics>({
-    totalExposure: 0,
-    maxExposure: 100000,
-    currentDrawdown: 0,
-    maxDrawdown: 20,
-    leverage: 1,
-    maxLeverage: 10,
-    openPositions: 0,
-    maxPositions: 10,
-    dailyPnL: 0,
-    dailyLossLimit: 5,
-  });
+  const [metrics, setMetrics] = useState<RiskMetrics>(DEFAULT_METRICS);
   const [alerts, setAlerts] = useState<RiskAlert[]>([]);
   const [positions, setPositions] = useState<PositionRisk[]>([]);
 
@@ -85,7 +88,7 @@ export function RiskDashboard() {
       const response = await fetch('/api/risk/metrics');
       if (response.ok) {
         const data = await response.json();
-        setMetrics(data.metrics || metrics);
+        setMetrics(data.metrics || DEFAULT_METRICS);
         setAlerts(data.alerts || []);
         setPositions(data.positions || []);
       }
@@ -93,12 +96,19 @@ export function RiskDashboard() {
       console.error('Failed to fetch risk data:', err);
     }
     setLoading(false);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    fetchRiskData();
+    // Use RAF to batch initial fetch with other updates
+    const rafId = requestAnimationFrame(() => {
+      fetchRiskData();
+    });
     const interval = setInterval(fetchRiskData, 3000);
-    return () => clearInterval(interval);
+    return () => {
+      cancelAnimationFrame(rafId);
+      clearInterval(interval);
+    };
   }, [fetchRiskData]);
 
   // Calculate percentages

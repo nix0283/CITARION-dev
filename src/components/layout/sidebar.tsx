@@ -65,6 +65,7 @@ interface MenuItem {
   code?: string
   icon: React.ComponentType<{ className?: string }>
   isNew?: boolean
+  badge?: string
 }
 
 interface BotCategory {
@@ -159,6 +160,7 @@ const mainMenuItems: MenuItem[] = [
   { id: "dashboard", label: "Дашборд", icon: LayoutDashboard },
   { id: "auto-trading-settings", label: "Настройки автоторговли", icon: Settings },
   { id: "chart", label: "График", icon: CandlestickChart },
+  { id: "multi-chart", label: "Мульти-график", icon: Grid3X3, isNew: true },
   { id: "trading", label: "Торговля", icon: LineChart },
   { id: "strategy-lab", label: "Лаборатория", icon: FlaskConical },
   { id: "hyperopt", label: "Гипероптим", icon: Sparkles },
@@ -246,22 +248,17 @@ export function Sidebar() {
   // Check if any copy trading item is active
   const isCopyTradingActive = copyTradingItems.some(item => item.id === activeTab)
 
-  // Mobile Drawer Overlay
-  const DrawerOverlay = () => (
-    <div 
-      className={cn(
-        "fixed inset-0 z-40 bg-black/60 backdrop-blur-sm transition-opacity duration-300 md:hidden",
-        sidebarOpen ? "opacity-100" : "opacity-0 pointer-events-none"
-      )}
-      onClick={() => setSidebarOpen(false)}
-      aria-hidden="true"
-    />
-  );
-
   return (
     <>
       {/* Mobile Drawer Overlay */}
-      <DrawerOverlay />
+      <div 
+        className={cn(
+          "fixed inset-0 z-40 bg-black/60 backdrop-blur-sm transition-opacity duration-300 md:hidden",
+          sidebarOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+        )}
+        onClick={() => setSidebarOpen(false)}
+        aria-hidden="true"
+      />
       
       {/* Mobile Menu Toggle Button */}
       <button

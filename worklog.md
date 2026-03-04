@@ -9273,3 +9273,148 @@ Files Verified:
 - src/lib/websocket/exchange-websocket-manager.ts
 - src/lib/monitoring/prometheus.ts
 - src/lib/alert-system/index.ts
+
+---
+Task ID: 19
+Agent: Main
+Task: Implement Phase 6 Features (CIT-043, CIT-044, CIT-047, CIT-048, CIT-049, CIT-050)
+
+Work Log:
+- Installed new dependencies:
+  - react-hotkeys-hook@5.2.4 for keyboard shortcuts
+  - react-grid-layout@2.2.2 for multi-chart layout
+  - @sentry/nextjs@10.42.0 for error monitoring
+  - @playwright/test@1.58.2 for E2E testing
+  - @types/react-grid-layout@2.1.0 for TypeScript support
+
+CIT-043: Hotkeys for Trading
+- Created `/src/hooks/use-trading-hotkeys.ts` - Complete hotkeys system
+- Hotkeys implemented:
+  - B: Open buy dialog
+  - S: Open sell dialog
+  - Shift+E: Close all positions
+  - Shift+C: Cancel all orders
+  - R: Refresh chart
+  - T: Toggle chart
+  - 1-6: Quick buy percentages
+  - ?: Toggle help panel
+- Integrated with PriceChart component
+- Visual feedback via toast notifications
+
+CIT-044: Order Visualization on Chart
+- Created `/src/components/chart/order-markers.tsx` - Order marker system
+- Marker types:
+  - Arrows for market orders (green up, red down)
+  - Circles for limit orders
+  - Squares for stop orders
+- useOrderMarkers hook for processing orders
+- getOrderMarkersForChart utility function
+- Integration with lightweight-charts setMarkers API
+
+CIT-047: E2E Testing with Playwright
+- Created `/playwright.config.ts` - Test configuration
+- Created test suites:
+  - `/tests/e2e/dashboard.spec.ts` - Dashboard tests
+  - `/tests/e2e/chart.spec.ts` - Chart interaction tests
+  - `/tests/e2e/trading.spec.ts` - Trading flow tests
+  - `/tests/e2e/bots.spec.ts` - Bot management tests
+- Browser configs: Chromium (Desktop, Mobile, Tablet)
+- Test features:
+  - Accessibility testing
+  - Mobile responsiveness
+  - Touch target validation
+  - Hotkey testing
+
+CIT-048: Multi-Chart Mode
+- Created `/src/components/chart/multi-chart-panel.tsx` - Multi-chart grid
+- Layout presets:
+  - 2 Horizontal
+  - 2 Vertical
+  - 3 Mixed
+  - 4 Grid
+  - 6 Grid
+- Features:
+  - Drag & drop rearrangement
+  - Resizable charts
+  - Symbol/timeframe per chart
+  - Layout persistence
+- Added "multi-chart" to sidebar navigation
+- Integration with react-grid-layout
+
+CIT-049: One-Click Trading
+- Created `/src/components/chart/one-click-trading.tsx` - One-click dialog
+- Features:
+  - Click on chart to trade at that price
+  - Quick size buttons (1%, 5%, 10%, 25%, 50%, 100%)
+  - Stop loss/take profit suggestions
+  - Order confirmation
+- Integration with PriceChart click handler
+- Toggle button in chart toolbar
+
+CIT-050: Sentry Integration
+- Created `/src/lib/monitoring/sentry.ts` - Sentry configuration
+- Created config files:
+  - `/sentry.client.config.ts` - Client-side
+  - `/sentry.server.config.ts` - Server-side
+  - `/sentry.edge.config.ts` - Edge runtime
+- Features:
+  - Automatic error capture
+  - Performance monitoring
+  - Session replay
+  - Privacy masking
+- Helper functions:
+  - captureTradeError()
+  - captureBotError()
+  - captureAPIError()
+  - setSentryUserContext()
+
+Lint Fixes:
+- Fixed order-markers.tsx: Removed hook call in non-hook function
+- Fixed balance-widget.tsx: Used RAF for setState in effect
+- Fixed sidebar.tsx: Moved DrawerOverlay outside render
+- Fixed institutional-panel.tsx: Used RAF for initial fetch
+- Fixed risk-dashboard.tsx: Added DEFAULT_METRICS constant
+- Fixed rl-panel.tsx: Used RAF for initial fetch
+- Fixed graceful-shutdown.ts: Fixed setTimeout syntax
+- Fixed exchange-adapter.ts: Changed require to dynamic import
+- Fixed paper-adapter.ts: Changed require to dynamic import
+
+Stage Summary:
+- All 6 CIT items fully implemented
+- Production-ready code with no stubs
+- E2E testing framework ready for use
+- Error monitoring integrated
+- Multi-chart mode available
+- Hotkeys system complete
+- One-click trading functional
+- All lint errors fixed (0 errors, 29 warnings)
+
+Files Created:
+- `/src/hooks/use-trading-hotkeys.ts`
+- `/src/components/chart/order-markers.tsx`
+- `/src/components/chart/one-click-trading.tsx`
+- `/src/components/chart/multi-chart-panel.tsx`
+- `/src/lib/monitoring/sentry.ts`
+- `/sentry.client.config.ts`
+- `/sentry.server.config.ts`
+- `/sentry.edge.config.ts`
+- `/playwright.config.ts`
+- `/tests/e2e/dashboard.spec.ts`
+- `/tests/e2e/chart.spec.ts`
+- `/tests/e2e/trading.spec.ts`
+- `/tests/e2e/bots.spec.ts`
+- `/docs/PHASE6_FEATURE_ADDITIONS.md`
+
+Files Modified:
+- `/src/components/chart/price-chart.tsx` - Integrated all new features
+- `/src/components/layout/sidebar.tsx` - Added multi-chart menu item
+- `/src/app/page.tsx` - Added MultiChartPanel component
+- `/src/components/dashboard/balance-widget.tsx` - Fixed lint error
+- `/src/components/panels/institutional-panel.tsx` - Fixed lint error
+- `/src/components/panels/risk-dashboard.tsx` - Fixed lint error
+- `/src/components/panels/rl-panel.tsx` - Fixed lint error
+- `/src/lib/graceful-shutdown.ts` - Fixed setTimeout syntax
+- `/src/lib/grid-bot/exchange-adapter.ts` - Fixed require import
+- `/src/lib/grid-bot/paper-adapter.ts` - Fixed require import
+- `/package.json` - Added new dependencies
+

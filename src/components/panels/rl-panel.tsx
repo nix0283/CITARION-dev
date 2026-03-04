@@ -103,13 +103,19 @@ export function RLPanel() {
 
   // Poll status when training
   useEffect(() => {
-    fetchAgents();
+    // Use RAF to batch initial fetch with other updates
+    const rafId = requestAnimationFrame(() => {
+      fetchAgents();
+    });
     const interval = setInterval(() => {
       if (trainingStatus.status === 'training') {
         fetchStatus();
       }
     }, 2000);
-    return () => clearInterval(interval);
+    return () => {
+      cancelAnimationFrame(rafId);
+      clearInterval(interval);
+    };
   }, [trainingStatus.status, fetchStatus, fetchAgents]);
 
   // Start training

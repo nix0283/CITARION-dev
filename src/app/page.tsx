@@ -30,6 +30,7 @@ import { FundingRateWidget } from "@/components/dashboard/funding-rate-widget";
 import { NotificationsPanel } from "@/components/notifications/notifications-panel";
 import { TelegramSettings } from "@/components/telegram/telegram-settings";
 import { PriceChart } from "@/components/chart/price-chart";
+import { MultiChartPanel } from "@/components/chart/multi-chart-panel";
 import { CopyTradingPanel } from "@/components/copy-trading/copy-trading-panel";
 import { MasterTraderPanel } from "@/components/copy-trading/master-trader-panel";
 import { StrategyLab } from "@/components/strategy-lab/strategy-lab";
@@ -109,8 +110,22 @@ function DashboardContent() {
 
       case "chart":
         return (
-          <div className="flex-1 flex flex-col min-h-0 rounded-lg border border-border bg-card overflow-hidden">
+          <div className="flex-1 flex flex-col min-h-0 rounded-lg border border-border bg-card overflow-hidden" data-testid="chart-container">
             <PriceChart />
+          </div>
+        );
+
+      case "multi-chart":
+        return (
+          <div className="flex-1 flex flex-col min-h-0 rounded-lg border border-border bg-card overflow-hidden" data-testid="multi-chart-container">
+            <MultiChartPanel
+              renderChart={(symbol, timeframe, chartId) => (
+                <div key={chartId} className="h-full w-full" data-testid={`chart-${chartId}`}>
+                  <PriceChart />
+                </div>
+              )}
+              containerWidth={1200}
+            />
           </div>
         );
 

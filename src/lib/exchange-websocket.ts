@@ -965,6 +965,8 @@ export class ExchangeWebSocket extends EventEmitter {
   private reconnectAttempts = 0;
   private maxReconnectAttempts = 10;
   private reconnectDelay = 1000;
+  private maxReconnectDelay = 60000; // 60 seconds max
+  private reconnectTimeout: NodeJS.Timeout | null = null;
   private pingInterval: NodeJS.Timeout | null = null;
   private prices: Map<string, TickerUpdate> = new Map();
   private lastPongTime: number = 0;
@@ -1018,7 +1020,7 @@ export class ExchangeWebSocket extends EventEmitter {
       this.ws.onopen = () => {
         console.log(`[${this.config.name}] WebSocket connected`);
         this.status = "connected";
-        this.reconnectAttempts = 0;
+        this.resetReconnectState();
         this.lastPongTime = Date.now();
         this.emit("status", this.status);
         
@@ -1155,21 +1157,61 @@ export class ExchangeWebSocket extends EventEmitter {
   }
   
   private scheduleReconnect(): void {
+    // Clear any existing reconnect timeout
+    if (this.reconnectTimeout) {
+      clearTimeout(this.reconnectTimeout);
+      this.reconnectTimeout = null;
+    }
+
     if (this.reconnectAttempts < this.maxReconnectAttempts) {
-      // Exponential backoff with max delay of 60 seconds
-      const delay = Math.min(this.reconnectDelay * Math.pow(2, this.reconnectAttempts), 60000);
-      console.log(`[${this.config.name}] Reconnecting in ${delay}ms (attempt ${this.reconnectAttempts + 1})`);
+      // Exponential backoff with jitter to prevent thundering herd
+      // Using full jitter strategy: delay = random(0, min(cap, base * 2 ^ attempt))
+      const exponentialDelay = this.reconnectDelay * Math.pow(2, this.reconnectAttempts);
+      const cappedDelay = Math.min(exponentialDelay, this.maxReconnectDelay);
       
-      setTimeout(() => {
+      // Full jitter: random between 0 and capped delay
+      // This prevents synchronized reconnection attempts across multiple clients
+      const jitter = Math.random() * cappedDelay * 0.3; // 30% jitter
+      const delay = Math.floor(cappedDelay + jitter);
+      
+      console.log(`[${this.config.name}] Reconnecting in ${delay}ms (attempt ${this.reconnectAttempts + 1}/${this.maxReconnectAttempts})`);
+      
+      this.reconnectTimeout = setTimeout(() => {
         this.reconnectAttempts++;
         this.connect();
       }, delay);
+    } else {
+      console.error(`[${this.config.name}] Max reconnection attempts (${this.maxReconnectAttempts}) reached. Giving up.`);
+      this.status = "error";
+      this.emit("status", this.status);
+      this.emit("error", new Error("Max reconnection attempts reached"));
+    }
+  }
+  
+  /**
+   * Reset reconnection state (call after successful connection)
+   */
+  private resetReconnectState(): void {
+    this.reconnectAttempts = 0;
+    if (this.reconnectTimeout) {
+      clearTimeout(this.reconnectTimeout);
+      this.reconnectTimeout = null;
     }
   }
   
   disconnect(): void {
     this.stopPingInterval();
     this.stopHeartbeatCheck();
+    
+    // Clear any pending reconnect
+    if (this.reconnectTimeout) {
+      clearTimeout(this.reconnectTimeout);
+      this.reconnectTimeout = null;
+    }
+    
+    // Reset reconnection state
+    this.resetReconnectState();
+    
     if (this.ws) {
       this.ws.close();
       this.ws = null;

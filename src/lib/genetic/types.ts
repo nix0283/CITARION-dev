@@ -311,6 +311,167 @@ export interface BotOptimizationConfig {
 }
 
 // ============================================================================
+// IMMIGRATION MECHANISM (CIT-029)
+// ============================================================================
+
+/**
+ * Immigration strategy to maintain genetic diversity
+ */
+export type ImmigrationStrategy = 'random' | 'diverse' | 'hybrid'
+
+/**
+ * Immigration configuration
+ */
+export interface ImmigrationConfig {
+  enabled: boolean
+  rate: number                    // Percentage of population to replace (0.0-1.0)
+  interval: number                // Apply immigration every N generations
+  strategy: ImmigrationStrategy
+  preserveElites: number          // Number of elites to protect from replacement
+  diversityThreshold?: number     // Trigger immigration if diversity below threshold
+}
+
+/**
+ * Default immigration configuration
+ */
+export const DEFAULT_IMMIGRATION_CONFIG: ImmigrationConfig = {
+  enabled: true,
+  rate: 0.1,
+  interval: 10,
+  strategy: 'diverse',
+  preserveElites: 5,
+  diversityThreshold: 0.05,
+}
+
+// ============================================================================
+// OVERFITTING PROTECTION (CIT-027)
+// ============================================================================
+
+/**
+ * Cross-validation split type
+ */
+export type CrossValidationType = 'train-test' | 'k-fold' | 'walk-forward' | 'time-series'
+
+/**
+ * Overfitting protection configuration
+ */
+export interface OverfittingProtectionConfig {
+  enabled: boolean
+  validationSplit: number         // Fraction of data for validation (0.0-1.0)
+  crossValidationType: CrossValidationType
+  kFolds?: number                 // For k-fold cross-validation
+  maxTrainTestGap: number         // Maximum allowed train/test performance gap
+  penaltyWeight: number           // Weight for overfitting penalty
+  earlyStoppingPatience?: number  // Stop if validation fitness doesn't improve
+  walkForwardWindows?: number     // For walk-forward validation
+  walkForwardTrainRatio?: number  // Ratio of training window
+}
+
+/**
+ * Default overfitting protection configuration
+ */
+export const DEFAULT_OVERFITTING_CONFIG: OverfittingProtectionConfig = {
+  enabled: true,
+  validationSplit: 0.3,
+  crossValidationType: 'train-test',
+  maxTrainTestGap: 0.25,
+  penaltyWeight: 0.5,
+  earlyStoppingPatience: 10,
+}
+
+/**
+ * Validation result for fitness evaluation
+ */
+export interface ValidationResult {
+  trainFitness: number
+  validationFitness: number
+  overfittingScore: number        // 0 = no overfitting, 1 = severe overfitting
+  penalizedFitness: number        // Fitness with overfitting penalty applied
+  isValid: boolean                // True if within acceptable bounds
+}
+
+// ============================================================================
+// PARALLEL FITNESS EVALUATION (CIT-028)
+// ============================================================================
+
+/**
+ * Parallel execution mode
+ */
+export type ParallelMode = 'none' | 'threads' | 'batch' | 'async'
+
+/**
+ * Parallel evaluation configuration
+ */
+export interface ParallelEvaluationConfig {
+  enabled: boolean
+  mode: ParallelMode
+  maxWorkers: number              // Maximum number of parallel workers
+  batchSize: number               // Number of individuals per batch
+  timeout: number                 // Timeout per evaluation in ms
+  retries: number                 // Number of retries for failed evaluations
+}
+
+/**
+ * Default parallel evaluation configuration
+ */
+export const DEFAULT_PARALLEL_CONFIG: ParallelEvaluationConfig = {
+  enabled: true,
+  mode: 'async',
+  maxWorkers: 4,
+  batchSize: 10,
+  timeout: 30000,
+  retries: 2,
+}
+
+/**
+ * Worker task for parallel evaluation
+ */
+export interface FitnessWorkerTask {
+  id: string
+  chromosome: Chromosome
+  context: FitnessContext
+}
+
+/**
+ * Worker result from parallel evaluation
+ */
+export interface FitnessWorkerResult {
+  id: string
+  fitness: number
+  objectives?: number[]
+  error?: string
+  duration: number
+}
+
+// ============================================================================
+// ENHANCED GA CONFIGURATION
+// ============================================================================
+
+/**
+ * Extended GA configuration with all enhancements
+ */
+export interface EnhancedGAConfig extends GAConfig {
+  // Immigration mechanism
+  immigration?: ImmigrationConfig
+  
+  // Overfitting protection
+  overfittingProtection?: OverfittingProtectionConfig
+  
+  // Parallel evaluation
+  parallelEvaluation?: ParallelEvaluationConfig
+}
+
+/**
+ * Default enhanced GA configuration
+ */
+export const DEFAULT_ENHANCED_GA_CONFIG: Omit<EnhancedGAConfig, 'chromosomeTemplate'> = {
+  ...DEFAULT_GA_CONFIG,
+  immigration: DEFAULT_IMMIGRATION_CONFIG,
+  overfittingProtection: DEFAULT_OVERFITTING_CONFIG,
+  parallelEvaluation: DEFAULT_PARALLEL_CONFIG,
+}
+
+// ============================================================================
 // UTILITY FUNCTIONS
 // ============================================================================
 

@@ -12,6 +12,14 @@
  * - Copy Trading through V5 API
  * - Master/Follower relationship management
  * - Slippage Protection for follower executions
+ * - FIFO Queue for order management
+ * - Fill Ratio Tracking for partial fills
+ * 
+ * API Availability Notes:
+ * - Bybit doesn't expose public APIs for trader rankings or statistics
+ * - Follower subscription/settings must be managed through Bybit Copy Trading UI
+ * - Master traders use standard V5 trading endpoints
+ * - Copy trading execution happens automatically by Bybit platform
  */
 
 import {
@@ -38,6 +46,20 @@ import {
   SlippageResult,
   CopyTradeContext,
 } from "../../copy-trading/slippage-protector";
+import {
+  CopyTradingFIFOQueue,
+  QueueMessage,
+  OpenPositionPayload,
+  ClosePositionPayload,
+  getDefaultFIFOQueue,
+} from "../../copy-trading/fifo-queue";
+import {
+  FillRatioTracker,
+  FillRatioResult,
+  OrderFillRecord,
+  FillRatioConfig,
+  getDefaultFillRatioTracker,
+} from "../../copy-trading/fill-ratio-tracker";
 
 /**
  * Bybit Copy Trading Client

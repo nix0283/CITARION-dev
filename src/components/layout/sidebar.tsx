@@ -50,6 +50,8 @@ import {
   Copy,
   X,
   Menu,
+  BookOpen,
+  Percent,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -158,8 +160,20 @@ const copyTradingItems: CopyTradingSubItem[] = [
 
 const mainMenuItems: MenuItem[] = [
   { id: "dashboard", label: "Дашборд", icon: LayoutDashboard },
-  { id: "auto-trading-settings", label: "Настройки автоторговли", icon: Settings },
   { id: "chart", label: "График", icon: CandlestickChart },
+  { id: "portfolio", label: "Портфель", icon: Wallet },
+  { id: "bots", label: "Боты", icon: Bot, badge: "6" },
+  { id: "signals", label: "Сигналы", icon: Zap, badge: "4" },
+  { id: "positions", label: "Позиции", icon: Target },
+  { id: "trades", label: "Сделки", icon: History },
+  { id: "funding", label: "Фандинг", icon: Percent },
+  { id: "analytics", label: "Аналитика", icon: BarChart3 },
+  { id: "journal", label: "Журнал", icon: BookOpen },
+  { id: "news", label: "Новости", icon: Bell, badge: "3" },
+]
+
+const otherMenuItems: MenuItem[] = [
+  { id: "auto-trading-settings", label: "Настройки автоторговли", icon: Settings },
   { id: "multi-chart", label: "Мульти-график", icon: Grid3X3 },
   { id: "trading", label: "Торговля", icon: LineChart },
   { id: "strategy-lab", label: "Лаборатория", icon: FlaskConical },
@@ -171,13 +185,6 @@ const mainMenuItems: MenuItem[] = [
   { id: "risk-management", label: "Риск-менеджмент", icon: Shield },
   { id: "chat", label: "Оракул", icon: MessageSquare },
   { id: "exchanges", label: "Биржи", icon: Building2 },
-]
-
-const otherMenuItems: MenuItem[] = [
-  { id: "analytics", label: "Аналитика", icon: BarChart3 },
-  { id: "history", label: "История", icon: History },
-  { id: "wallet", label: "Кошелёк", icon: Wallet },
-  { id: "settings", label: "Настройки", icon: Settings },
 ]
 
 const bottomMenuItems: MenuItem[] = [
@@ -365,6 +372,11 @@ export function Sidebar() {
               >
                 <Icon className="h-5 w-5 flex-shrink-0" aria-hidden="true" />
                 {sidebarOpen && <span>{item.label}</span>}
+                {sidebarOpen && item.badge && (
+                  <Badge variant="secondary" className="ml-auto text-[10px] px-1.5 py-0.5 bg-[#0ECB81]/20 text-[#0ECB81] border-[#0ECB81]/30">
+                    {item.badge}
+                  </Badge>
+                )}
                 {sidebarOpen && item.isNew && (
                   <Badge variant="secondary" className="ml-auto text-[10px] px-1.5 py-0.5 bg-purple-500/20 text-purple-500 border-purple-500/30">
                     NEW
@@ -374,7 +386,7 @@ export function Sidebar() {
             );
           })}
 
-          {/* Bots Section Header */}
+          {/* Advanced Section Header */}
           {sidebarOpen && (
             <div className="pt-4">
               <button
@@ -383,7 +395,7 @@ export function Sidebar() {
                 className={cn(
                   "flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200",
                   "hover:bg-accent active:scale-[0.98] cursor-pointer",
-                  "min-h-11 touch-target", // Touch-friendly size
+                  "min-h-11 touch-target",
                   isBotActive
                     ? "bg-primary/10 text-primary"
                     : "text-muted-foreground hover:text-foreground"
@@ -391,8 +403,8 @@ export function Sidebar() {
                 role="menuitem"
                 aria-expanded={botsExpanded}
               >
-                <Bot className="h-5 w-5 flex-shrink-0" aria-hidden="true" />
-                <span className="flex-1 text-left">Боты</span>
+                <FlaskConical className="h-5 w-5 flex-shrink-0" aria-hidden="true" />
+                <span className="flex-1 text-left">Расширенные</span>
                 {botsExpanded ? (
                   <ChevronUp className="h-4 w-4" />
                 ) : (
@@ -400,8 +412,89 @@ export function Sidebar() {
                 )}
               </button>
 
-              {/* Bot Categories (nested under Bots) */}
+              {/* Advanced Items */}
               {botsExpanded && (
+                <div className="mt-1 ml-2 space-y-0.5">
+                  {otherMenuItems.map((item) => {
+                    const isActive = activeTab === item.id;
+                    const Icon = item.icon;
+                    
+                    return (
+                      <button
+                        key={item.id}
+                        type="button"
+                        onClick={() => handleTabChange(item.id)}
+                        className={cn(
+                          "flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm transition-all duration-200",
+                          "hover:bg-accent active:scale-[0.98] cursor-pointer",
+                          "min-h-11 touch-target",
+                          isActive
+                            ? "bg-primary/10 text-primary font-medium"
+                            : "text-muted-foreground hover:text-foreground"
+                        )}
+                        role="menuitem"
+                        aria-current={isActive ? "page" : undefined}
+                      >
+                        <Icon className="h-4 w-4 flex-shrink-0" aria-hidden="true" />
+                        <span>{item.label}</span>
+                      </button>
+                    )
+                  })}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Collapsed sidebar - show advanced icon */}
+          {!sidebarOpen && (
+            <div className="pt-2 hidden md:block">
+              <button
+                type="button"
+                onClick={() => setBotsExpanded(!botsExpanded)}
+                className={cn(
+                  "flex w-full items-center justify-center rounded-lg py-2.5 text-sm font-medium transition-all duration-200",
+                  "hover:bg-accent active:scale-[0.98] cursor-pointer",
+                  "min-h-11",
+                  isBotActive
+                    ? "bg-primary/10 text-primary"
+                    : "text-muted-foreground hover:text-foreground"
+                )}
+                title="Расширенные"
+                aria-label="Расширенные"
+              >
+                <FlaskConical className="h-5 w-5" />
+              </button>
+            </div>
+          )}
+
+          {/* Bots Section Header - Moved Below */}
+          {sidebarOpen && (
+            <div className="pt-4">
+              <button
+                type="button"
+                onClick={() => setCopyTradingExpanded(!copyTradingExpanded)}
+                className={cn(
+                  "flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200",
+                  "hover:bg-accent active:scale-[0.98] cursor-pointer",
+                  "min-h-11 touch-target", // Touch-friendly size
+                  isCopyTradingActive
+                    ? "bg-primary/10 text-primary"
+                    : "text-muted-foreground hover:text-foreground"
+                )}
+                role="menuitem"
+                aria-expanded={copyTradingExpanded}
+              >
+                <Bot className="h-5 w-5 flex-shrink-0" aria-hidden="true" />
+                <span className="flex-1 text-left">Все боты</span>
+                {copyTradingExpanded ? (
+                  <ChevronUp className="h-4 w-4" />
+                ) : (
+                  <ChevronDown className="h-4 w-4" />
+                )}
+              </button>
+
+              {/* Bot Categories (nested under Bots) */}
+              {copyTradingExpanded && (
                 <div className="mt-1 space-y-1">
                   {botCategories.map((category) => {
                     const CategoryIcon = category.icon
@@ -485,17 +578,17 @@ export function Sidebar() {
             <div className="pt-2 hidden md:block">
               <button
                 type="button"
-                onClick={() => setBotsExpanded(!botsExpanded)}
+                onClick={() => setCopyTradingExpanded(!copyTradingExpanded)}
                 className={cn(
                   "flex w-full items-center justify-center rounded-lg py-2.5 text-sm font-medium transition-all duration-200",
                   "hover:bg-accent active:scale-[0.98] cursor-pointer",
                   "min-h-11",
-                  isBotActive
+                  isCopyTradingActive
                     ? "bg-primary/10 text-primary"
                     : "text-muted-foreground hover:text-foreground"
                 )}
-                title="Боты"
-                aria-label="Боты"
+                title="Все боты"
+                aria-label="Все боты"
               >
                 <Bot className="h-5 w-5" />
               </button>
@@ -582,33 +675,6 @@ export function Sidebar() {
               </button>
             </div>
           )}
-
-          {/* Other navigation items */}
-          {otherMenuItems.map((item) => {
-            const isActive = activeTab === item.id;
-            const Icon = item.icon;
-            
-            return (
-              <button
-                key={item.id}
-                type="button"
-                onClick={() => handleTabChange(item.id)}
-                className={cn(
-                  "flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200",
-                  "hover:bg-accent active:scale-[0.98] cursor-pointer",
-                  "min-h-11 touch-target", // Touch-friendly size
-                  isActive
-                    ? "bg-primary/10 text-primary"
-                    : "text-muted-foreground hover:text-foreground"
-                )}
-                role="menuitem"
-                aria-current={isActive ? "page" : undefined}
-              >
-                <Icon className="h-5 w-5 flex-shrink-0" aria-hidden="true" />
-                {sidebarOpen && <span>{item.label}</span>}
-              </button>
-            );
-          })}
         </nav>
 
         {/* Bottom Menu */}

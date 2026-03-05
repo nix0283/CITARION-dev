@@ -40,6 +40,30 @@ Border Dark:     rgba(255,255,255,0.1)
 Border Light:    rgba(0,0,0,0.1)
 ```
 
+### CITARION Brand Colors (Unified System)
+
+```
+LONG / Profit / Success / Active:  #0ECB81 (green)
+SHORT / Loss / Error:              #F6465D (red)
+DEMO Mode / Warning:               #F59E0B (amber)
+Primary Gold:                      #F0B90B
+```
+
+**Usage Guidelines:**
+- All LONG positions, profit values, and success states use `#0ECB81`
+- All SHORT positions, loss values, and error states use `#F6465D`
+- DEMO mode badges and warnings use `amber-500` (`#F59E0B`)
+- Badge components use `variant="outline"` with custom color classes
+
+**Implementation:**
+```tsx
+// Correct color usage
+<Badge className="text-[#0ECB81] border-[#0ECB81]/30">LONG</Badge>
+<Badge className="text-[#F6465D] border-[#F6465D]/30">SHORT</Badge>
+<span className="text-[#0ECB81]">+$1,234</span>
+<span className="text-[#F6465D]">-$567</span>
+```
+
 ### Typography
 
 ```
@@ -364,10 +388,64 @@ Full:  9999px (pills/badges)
 
 | Version | Date | Changes |
 |---------|------|---------|
-| 2.0.0 | 2026 | Complete UI/UX redesign |
+| 2.1.0 | March 2026 | Unified brand colors, hydration fix |
+| 2.0.0 | January 2026 | Complete UI/UX redesign |
 | 1.0.0 | 2025 | Initial implementation |
 
 ---
 
+## Technical Notes
+
+### Hydration Mismatch Prevention
+
+Time-dependent content (like "5m ago") requires special handling to prevent React hydration errors:
+
+```tsx
+// Pattern 1: useMounted hook with useState
+function TimeAgo({ date }: { date: Date }) {
+  const [mounted, setMounted] = useState(false);
+  
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  
+  const timeAgo = useMemo(() => {
+    if (!mounted) return "--";
+    // Calculate time on client only
+    return formatTime(date);
+  }, [mounted, date]);
+  
+  return <span>{timeAgo}</span>;
+}
+
+// Pattern 2: useSyncExternalStore
+function TimeUntil({ date }: { date: Date }) {
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
+  
+  if (!mounted) return <span>-</span>;
+  return <span>{formatTimeUntil(date)}</span>;
+}
+```
+
+**Why this matters:**
+- `Date.now()` returns different values on server vs client
+- React hydrates by comparing server HTML to client render
+- Mismatch causes hydration error and re-render
+
+---
+
+## GitHub Repositories
+
+| Repository | URL | Purpose |
+|------------|-----|---------|
+| CITARION-dev | https://github.com/nix0283/CITARION-dev | Primary backup |
+| citarion-dev2 | https://github.com/nix0283/citarion-dev2 | Secondary backup |
+
+---
+
 *Document created: January 2026*
-*Last updated: January 2026*
+*Last updated: March 2026*

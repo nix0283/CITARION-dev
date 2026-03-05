@@ -1,0 +1,47 @@
+[
+  {
+    "url": "https://www.tradingview.com/script/J0yTYz0i-Kagi-Implementation-ATR",
+    "name": "Kagi Implementation (+ATR) — Indicator by amit1337",
+    "snippet": "Apr 11, 2021 — I decided to implement it myself and test it against the built-in Kagi indicator calculated by the built-in security function - They ended up exactly the same! Read more\nMy Own Kagi Indicator Implementation! I couldn't find anywhere on the internet a simple implementation of the Kagi indicator (apart from a seemingly complicated JavaScript implementation).",
+    "host_name": "www.tradingview.com",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://in.tradingview.com/scripts/kagi",
+    "name": "Kagi — Indicators and Strategies",
+    "snippet": "This is a simple study that plots kagi values over your current chart . Works with both price action and time based charting. Read more\nKagi Implementation (+ATR) My Own Kagi Indicator Implementation! I couldn't find anywhere on the internet a simple implementation of the Kagi indicator (apart from a seemingly complicated JavaScript implementation).",
+    "host_name": "in.tradingview.com",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.tradingview.com/support/solutions/43000502272-learn-to-use-kagi-charts",
+    "name": "Learn to use Kagi charts",
+    "snippet": "Kagi charts are a specific chart type composed of vertical lines — green for up and red for down — and small horizontal lines that connect them. Read more",
+    "host_name": "www.tradingview.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://vn.tradingview.com/support/solutions/43000502272",
+    "name": "Tìm hiểu cách sử dụng biểu đồ Kagi",
+    "snippet": "Biểu đồ Kagi là một loại biểu đồ cụ thể bao gồm các đường thẳng đứng (màu xanh lá cây cho giá lên và màu đỏ cho giá xuống) và các đường ngang nhỏ kết ...",
+    "host_name": "vn.tradingview.com",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://es.tradingview.com/scripts/kagi/?script_type=indicators&script_access=all&sort=recent",
+    "name": "Kagi — Indicadores y estrategias",
+    "snippet": "May 3, 2022 — I couldn't find anywhere on the internet a simple implementation of the Kagi indicator (apart from a seemingly complicated JavaScript ... Read more",
+    "host_name": "es.tradingview.com",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  }
+]

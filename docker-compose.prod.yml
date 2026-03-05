@@ -1,0 +1,179 @@
+# CITARION Production Docker Compose
+# Usage: docker-compose -f docker-compose.prod.yml up -d
+
+version: '3.8'
+
+services:
+  # ===========================================================================
+  # APPLICATION
+  # ===========================================================================
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.production
+    container_name: citarion-app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgresql://citarion:${POSTGRES_PASSWORD}@postgres:5432/citarion
+      - REDIS_URL=redis://redis:6379
+      - ENCRYPTION_KEY=${ENCRYPTION_KEY}
+      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
+      - NEXTAUTH_URL=${NEXTAUTH_URL}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    networks:
+      - citarion-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # ===========================================================================
+  # DATABASE (PostgreSQL + TimescaleDB)
+  # ===========================================================================
+
+  postgres:
+    image: timescale/timescaledb:latest-pg16
+    container_name: citarion-postgres
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=citarion
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=citarion
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./prisma/timescaledb-setup.sql:/docker-entrypoint-initdb.d/timescaledb-setup.sql:ro
+    networks:
+      - citarion-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U citarion"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ===========================================================================
+  # REDIS
+  # ===========================================================================
+
+  redis:
+    image: redis:7-alpine
+    container_name: citarion-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+    volumes:
+      - redis_data:/data
+    networks:
+      - citarion-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ===========================================================================
+  # LUMIBOT SERVICE (Python)
+  # ===========================================================================
+
+  lumibot:
+    build:
+      context: ./lumibot-service
+      dockerfile: Dockerfile
+    container_name: citarion-lumibot
+    restart: unless-stopped
+    ports:
+      - "8001:8001"
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - NATS_URL=nats://nats:4222
+    depends_on:
+      - redis
+      - nats
+    networks:
+      - citarion-network
+
+  # ===========================================================================
+  # NATS (Message Broker)
+  # ===========================================================================
+
+  nats:
+    image: nats:2-alpine
+    container_name: citarion-nats
+    restart: unless-stopped
+    ports:
+      - "4222:4222"  # Client connections
+      - "8222:8222"  # HTTP monitoring
+    command: ["--http_port", "8222", "--jetstream", "--store_dir", "/data"]
+    volumes:
+      - nats_data:/data
+    networks:
+      - citarion-network
+
+  # ===========================================================================
+  # PROMETHEUS (Monitoring)
+  # ===========================================================================
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: citarion-prometheus
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.enable-lifecycle'
+    networks:
+      - citarion-network
+
+  # ===========================================================================
+  # GRAFANA (Visualization)
+  # ===========================================================================
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: citarion-grafana
+    restart: unless-stopped
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+    depends_on:
+      - prometheus
+    networks:
+      - citarion-network
+
+# ===========================================================================
+# NETWORKS
+# ===========================================================================
+
+networks:
+  citarion-network:
+    driver: bridge
+
+# ===========================================================================
+# VOLUMES
+# ===========================================================================
+
+volumes:
+  postgres_data:
+  redis_data:
+  nats_data:
+  prometheus_data:
+  grafana_data:

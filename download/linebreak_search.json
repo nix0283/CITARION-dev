@@ -1,0 +1,47 @@
+[
+  {
+    "url": "https://stackoverflow.com/questions/48002134/insert-line-break-every-3-lines-in-javascript",
+    "name": "Insert line break every 3 lines in javascript? - Stack Overflow",
+    "snippet": "I'm still a newbie at javascript so I want to create a script that inserts a line break after every 3 lines. So here's my code I got so far. Three line break chart - Stack Overflow How to line break a label object in ChartsJS (nested arrays won't work) More results from stackoverflow.com",
+    "host_name": "stackoverflow.com",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/EarnForex/Three-Line-Break",
+    "name": "EarnForex/Three-Line-Break - GitHub",
+    "snippet": "Three-Line Break is a custom MT4/MT5 indicator coded by EarnForex.com. You can use it to display a line break chart in your MetaTrader platform. Missing: JavaScript implementation",
+    "host_name": "github.com",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://data-xtractor.com/chart-types/how-to-create-a-three-line-break-chart",
+    "name": "How to Create a Three Line Break Chart - Data Xtractor",
+    "snippet": "Display and enable the Chart query builder. · Select your first numeric column as Price Charts – Three Line Break. · For ... Missing: JavaScript implementation",
+    "host_name": "data-xtractor.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://usethinkscript.com/threads/request-for-three-line-break-charts-or-indicator-development.250",
+    "name": "Request for Three Line Break CHARTS OR INDICATOR",
+    "snippet": "I have been looking at THREE LINE BREAK CHARTS at some software and found its a very good way to look at price movments specially for trading breakouts and ... Missing: JavaScript implementation",
+    "host_name": "usethinkscript.com",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://chartschool.stockcharts.com/table-of-contents/chart-analysis/chart-types/three-line-break-charts",
+    "name": "Three Line Break Charts - ChartSchool - StockCharts.com",
+    "snippet": "Three Line Break charts show a series of vertical white and black lines; the white lines represent rising prices, while the black lines portray falling prices.",
+    "host_name": "chartschool.stockcharts.com",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  }
+]

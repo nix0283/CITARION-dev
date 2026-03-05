@@ -1,0 +1,47 @@
+[
+  {
+    "url": "https://www.okx.com/fees",
+    "name": "Trading Fee | Fee Rate | Crypto Exchange Fees | Fee Tiers",
+    "snippet": "If trader A (0.04% for maker fee and 0.1% for taker fee ) buys 1 USDT at the market price. As a taker in this trade, A's trading fee = 0.1% × 1 = 0.001 USDT. Read more",
+    "host_name": "www.okx.com",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.okx.com/help/trading-fee-rules-faq",
+    "name": "Trading Fee Rules FAQ",
+    "snippet": "Mar 22, 2024 — Trader A (Maker fee: 0.08%; Taker fee: 0.1%) bought 1 BTC at market price, and became a taker of this trade, so the Trading fee = 0.1% × 1 = 0. ... Read more",
+    "host_name": "www.okx.com",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.okx.com/learn/crypto-futures-fees-compared",
+    "name": "Crypto futures fees compared: a guide to cost-effective",
+    "snippet": "Apr 2, 2024 — Depending on your tier, your fee can go as low as -0.005% for the maker and 0.015% for the taker . You can learn more about the different tiers ... Read more",
+    "host_name": "www.okx.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://coincub.com/exchanges/okx-review",
+    "name": "OKX Review 2025: 5 Features That Make It a Top Exchange",
+    "snippet": "What are OKX's trading fees? OKX charges 0.08% for maker orders and 0.10% for taker orders on spot trades . Fees decrease for high-volume traders. Read more",
+    "host_name": "coincub.com",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/tiffanbtonin/know/blob/main/blog/OKX%20Fee%20Breakdown%3A%203%20Easy%20Ways%20to%20Reduce%20Trading%20Fees.md",
+    "name": "OKX Fee Breakdown: 3 Easy Ways to Reduce Trading Fees",
+    "snippet": "Dec 25, 2024 — Spot trading fees range between 0.08% and 0.1 %. Futures and options fees are between 0.02% and 0.05%. Below is a detailed summary of the most ... Read more",
+    "host_name": "github.com",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  }
+]

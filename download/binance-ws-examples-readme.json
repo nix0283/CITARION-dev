@@ -1,0 +1,18 @@
+{
+  "code": 200,
+  "data": {
+    "description": "",
+    "html": "<html><head><meta name=\"color-scheme\" content=\"light dark\"></head><body><pre style=\"word-wrap: break-word; white-space: pre-wrap;\"># Binance Websocket Examples\n\n## Local orderbook (Spot)\n\n```bash\n# Cache local orderbook and echo best price\n# btcusdt by default\nnpm run orderbook\n\n# or provide the trading pair\nSYMBOL=bnbusdt npm run orderbook\n\n```\n\n## Spot user data stream\n\n```bash\n# get user data steam\nAPIKEY=xxxxxx npm run user\n\n# Get margin account update from websocket\nAPIKEY=xxxxxx APISECRET=xxxxx npm run margin-user\n```\n\n## Futures user data stream\n\n```bash\n# Get user data steam on production\nAPIKEY=xxxxxx APISECRET=xxxxx npm run futures-user\n\n# On testnet\nAPIKEY=xxxxxx APISECRET=xxxxx WSS_BASE_URL=\"wss://stream.binancefuture.com/\" HTTP_BASE_URL=\"https://testnet.binancefuture.com/\" npm run futures-user\n```\n\n## Delivery Futures user data stream\n\n```bash\n# Get user data steam - defaults to production\nAPIKEY=xxxxxx APISECRET=xxxxx npm run delivery-futures-user\n```\n\n## Combined streams\n\n```bash\n# Get multi pairs stream, setting the pairs in src/multi-stream-depth\nnpm run multi-stream\n```\n\n## Spot trade stream delay monitoring\n\n```bash\nnpm run monitor-spot-trade\n```\n\n## Spot depth stream delay monitoring\n\n```bash\nnpm run monitor-spot-depth\n```\n\n## Futures depth stream delay monitoring\n\n```bash\nnpm run monitor-futures\n```\n\n## How to setup\n\n```bash\n\nnpm install\n\n# run test\nnpm run test\n\n```\n\n## License\nMIT\n</pre></body></html>",
+    "title": "",
+    "url": "https://raw.githubusercontent.com/binance/binance-websocket-examples/master/README.md",
+    "usage": {
+      "tokens": 380
+    }
+  },
+  "meta": {
+    "usage": {
+      "tokens": 380
+    }
+  },
+  "status": 20000
+}

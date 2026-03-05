@@ -1,0 +1,18 @@
+{
+  "code": 200,
+  "data": {
+    "description": "",
+    "html": "<html><head><meta name=\"color-scheme\" content=\"light dark\"></head><body><pre style=\"word-wrap: break-word; white-space: pre-wrap;\"># supertrend\n\nThe Super Trend indicator, is a trending indicator that can be used to identify if the price is in an upward or downward trend. If the price is above the line then it acts as a point of support, and if below the line it acts as a point of resistance. The indicator is based on the ATR indicator, and is used to identify the trend direction and strength.\n\n## Installation\n\n```bash\nyarn add supertrend\n```\n\n## Usage\n\n```typescript\nimport { supertrend } from 'supertrend';\n\nsupertrend({\n  initialArray: [\n    {\"high\":4035,\"low\":3893.77,\"close\":4020.99},\n    ...\n    {\"high\":5000,\"low\":4900.77,\"close\":4950.99},\n  ],\n  multiplier: 3,\n  period: 10,\n})\n// => [ 0, 4670.9619, 2000 ]\n```\n</pre></body></html>",
+    "title": "",
+    "url": "https://raw.githubusercontent.com/maxgfr/supertrend/main/README.md",
+    "usage": {
+      "tokens": 243
+    }
+  },
+  "meta": {
+    "usage": {
+      "tokens": 243
+    }
+  },
+  "status": 20000
+}

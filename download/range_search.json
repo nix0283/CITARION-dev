@@ -1,0 +1,47 @@
+[
+  {
+    "url": "https://www.ag-grid.com/charts/javascript/range-bar-series",
+    "name": "JavaScript Charts: Range Bar Series - AG Grid",
+    "snippet": "A Range Bar Series uses vertical or horizontal bars to show the range between high and low values in data. This series type is commonly used to assess data ... Missing: trading implementation",
+    "host_name": "www.ag-grid.com",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://canvasjs.com/javascript-charts/range-bar-chart",
+    "name": "JavaScript Range Bar Charts & Graphs - CanvasJS",
+    "snippet": "JavaScript Range Bar charts are very similar to Range Column Chart except that the bars are horizontally placed in order to emphasize y values on axis. Missing: trading implementation",
+    "host_name": "canvasjs.com",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=GYspHbgLCxo",
+    "name": "How to Create Range Bar Chart in Chart js - YouTube",
+    "snippet": "How to Create Range Bar Chart in Chart js In this video we will cover how to create range bar chart in chart js. With the bar chart the ... Missing: trading implementation",
+    "host_name": "www.youtube.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://js.devexpress.com/React/Demos/WidgetsGallery/Demo/Charts/RangeBar",
+    "name": "Range Bar - React Charts - DevExtreme - DevExpress",
+    "snippet": "This demo illustrates the range bar series type. You can use range bars to display value ranges that correspond to specified arguments. Missing: trading | Show results with: trading",
+    "host_name": "js.devexpress.com",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/Quantower/QuantowerKB/blob/master/analytics-panels/chart/chart-types/range-bars.md",
+    "name": "range-bars.md - analytics-panels - GitHub",
+    "snippet": "Range Bars chart consists of bars (candles) within a certain range, which is determined by the trader in the chart settings. Range Bars does not depend on ...",
+    "host_name": "github.com",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  }
+]

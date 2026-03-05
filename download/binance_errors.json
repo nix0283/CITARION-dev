@@ -1,0 +1,92 @@
+[
+  {
+    "url": "https://github.com/pixtron/binance-rate-limit",
+    "name": "pixtron/binance-rate-limit",
+    "snippet": "node.js rate limit tracker for binance . Let's you verify that you won't hit a rate limit before you send your api request. Read more",
+    "host_name": "github.com",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/ccxt/ccxt/issues/7484",
+    "name": "doesn't throw exception on binance API limit exceed #7484",
+    "snippet": "19 Aug 2020 — First, you should really respect the rate limits. You're creating an exchange instance in your parent process and load the markets there. Then ... Read more",
+    "host_name": "github.com",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://developers.binance.com/docs/derivatives/portfolio-margin/general-info",
+    "name": "General Info | Binance Open Platform",
+    "snippet": "Handling : Retry with exponential backoff (e.g., 200ms → 400ms → 800ms, max 3–5 attempts). Rate - limit counting: not counted. C. “Request throttled by system ... Read more",
+    "host_name": "developers.binance.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/knowm/XChange/issues/3211",
+    "name": "New unified approach to retrys and rate limiting · Issue #3211",
+    "snippet": "9 Sept 2019 — Doing rate limit in a generic way is impossible because you do not know how many underlining calls to the exchange are done and how are they ... Read more",
+    "host_name": "github.com",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.binance.com/en/academy/articles/how-to-avoid-getting-banned-by-rate-limits",
+    "name": "How to Avoid Getting Banned by Rate Limits?",
+    "snippet": "17 Jul 2025 — Manage Binance REST API rate limits effectively: monitor headers, handle 429 and 418 errors , use backoff strategies, and prevent IP bans.",
+    "host_name": "www.binance.com",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/Cryptotrademate/cryptotrademate-backtesting-tool/issues/3",
+    "name": "Issue 3: Missing Error Handling for API Requests #3",
+    "snippet": "19 Jun 2025 — Rate Limit Handling : Check the response headers for rate limit information (e.g., X- RateLimit -Remaining , X- RateLimit -Limit , Retry -After ) and ... Read more",
+    "host_name": "github.com",
+    "rank": 5,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://binance-docs.github.io/apiAgent-API-EN/General_EN",
+    "name": "General - Binance Api-Agent API Docs",
+    "snippet": "A Retry -After header is sent with a 418 or 429 responses and will give the number of seconds required to wait, in the case of a 429, to prevent a ban, or, in ... Read more",
+    "host_name": "binance-docs.github.io",
+    "rank": 6,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://developers.binance.com/docs/derivatives/usds-margined-futures/general-info",
+    "name": "General Info | Binance Open Platform",
+    "snippet": "Handling : Retry with exponential backoff (e.g., 200ms → 400ms → 800ms, max 3–5 attempts). Rate - limit counting: not counted ... Specific error codes and messages ... Read more",
+    "host_name": "developers.binance.com",
+    "rank": 7,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/ccxt/ccxt/issues/4104",
+    "name": "Error: binance GET request timed out (10000 ms) #4104",
+    "snippet": "3 Nov 2018 — But I get the \" binance GET request timed out (10000 ms)\" error after an hour of two for a random method I want to execute. I sync my local time ... Read more",
+    "host_name": "github.com",
+    "rank": 8,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/freqtrade/freqtrade/issues/8910",
+    "name": "How to set the number of klines data each request from",
+    "snippet": "15 Jul 2023 — By default, the number of klines data each request from Binance is 1000, which may excess the rate limit of Binance if keep requesting. Read more",
+    "host_name": "github.com",
+    "rank": 9,
+    "date": "",
+    "favicon": ""
+  }
+]

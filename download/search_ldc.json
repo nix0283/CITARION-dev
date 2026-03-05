@@ -1,0 +1,92 @@
+[
+  {
+    "url": "https://medium.com/@leeshuey.cynthia/lorentzian-classification-43a8081a433a",
+    "name": "Lorentzian classification",
+    "snippet": "So Lorentzian classification is a variant of KNN, where the distance function is swapped for one that better handles nonlinear distortions, ...",
+    "host_name": "medium.com",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.tradingview.com/script/WhBzgfDu-Machine-Learning-Lorentzian-Classification",
+    "name": "Machine Learning: Lorentzian Classification",
+    "snippet": "A Lorentzian Distance Classifier (LDC) is a Machine Learning classification algorithm capable of categorizing historical data from a multi-dimensional feature ...",
+    "host_name": "www.tradingview.com",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.scribd.com/document/867686302/Lorentzian-Algorithm-Trading-Strategy",
+    "name": "Lorentzian Algorithm Trading Strategy - Machine Learning PDF",
+    "snippet": "Rating 5.0 (1) The document discusses the development of a trading strategy using the Lorentzian Classification (LC) algorithm, which leverages a unique distance metric to ...",
+    "host_name": "www.scribd.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=AdINVvnJfX4",
+    "name": "Lorentzian Classification: Machine Learning Driven TradingView",
+    "snippet": "... Machine Learning Background 2:01 Nearest Neighbors Intuition 3:42 Distance Algorithm Visualization 4:40 Analogy to Space-Time and General ... Missing: implementation | Show results with: implementation",
+    "host_name": "www.youtube.com",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.researchgate.net/publication/282441155_A_new_classification_method_by_using_Lorentzian_distance_metric",
+    "name": "A new classification method by using Lorentzian distance",
+    "snippet": "In this study, we propose a new algorithm which works in Lorentzian space with a similar sense in the k-NN method.",
+    "host_name": "www.researchgate.net",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://medium.com/@leeshuey.cynthia/https-blog-quantinsti-com-machine-learning-k-nearest-neighbors-knn-algorithm-python-f837a2b9666b",
+    "name": "KNN in Trading - Medium",
+    "snippet": "KNN is a supervised machine learning algorithm used for classification and regression. It classifies new data points based on the majority vote ...",
+    "host_name": "medium.com",
+    "rank": 5,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=TGnzAiPk1ok",
+    "name": "Lorentzian Classification | AI BASED FREE TRADINGVIEW INDICATOR",
+    "snippet": "A Lorentzian Distance Classifier (LDC) is a Machine Learning classification algorithm capable of categorizing historical data from a ...",
+    "host_name": "www.youtube.com",
+    "rank": 6,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.prorealcode.com/topic/please-convert-code-to-prorealtime-code-source-from-trading-view-indicator",
+    "name": "Code source from trading view indicator - ProRealTime Forum",
+    "snippet": "// When using Machine Learning algorithms like K-Nearest Neighbors, choosing an // appropriate distance metric is essential. Euclidean ...",
+    "host_name": "www.prorealcode.com",
+    "rank": 7,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://id.tradingview.com/scripts/lorentzianclassification",
+    "name": "Lorentzianclassification: Indikator dan Strategi - TradingView",
+    "snippet": "A Lorentzian Distance Classifier (LDC) is a Machine Learning classification algorithm capable of categorizing historical data from a multi-dimensional feature ...",
+    "host_name": "id.tradingview.com",
+    "rank": 8,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.scribd.com/document/723730596/Lorentzian-Sessions-Jdehorty",
+    "name": "Lorentzian Sessions Jdehorty | PDF - Scribd",
+    "snippet": "This document discusses using Lorentzian distance as an alternative to Euclidean distance for machine learning algorithms like K-Nearest Neighbors.",
+    "host_name": "www.scribd.com",
+    "rank": 9,
+    "date": "",
+    "favicon": ""
+  }
+]

@@ -1,0 +1,92 @@
+[
+  {
+    "url": "https://github.com/oliver-zehentleitner/unicorn-binance-local-depth-cache",
+    "name": "oliver-zehentleitner/unicorn-binance-local-depth-cache",
+    "snippet": "A Python SDK for accessing and managing multiple local Binance order books with Python in a simple, fast, flexible, robust and fully featured way.",
+    "host_name": "github.com",
+    "rank": 0,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/tiagosiebler/binance/blob/master/src/websocket-client.ts",
+    "name": "binance/src/websocket-client.ts at master",
+    "snippet": "Node.js & JavaScript SDK for Binance REST APIs & WebSockets , with TypeScript & browser support, integration tests, beautification & more.",
+    "host_name": "github.com",
+    "rank": 1,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.binance.com/en/academy/articles/local-order-book-tutorial-part-3-keeping-the-websocket-connection",
+    "name": "Local Order Book Tutorial Part 3: Keeping the WebSocket",
+    "snippet": "28 Nov 2025 — Keep a local Binance order book up to date by discarding old events, setting the snapshot, and applying updates for accurate real-time ...",
+    "host_name": "www.binance.com",
+    "rank": 2,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/binance/binance-websocket-examples/blob/master/README.md",
+    "name": "binance-websocket-examples/README.md at master",
+    "snippet": "Binance Websocket Examples. Local orderbook (Spot). # Cache local orderbook and echo best price # btcusdt by default npm run orderbook # or provide the ... Read more",
+    "host_name": "github.com",
+    "rank": 3,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://stackoverflow.com/questions/53067874/binance-order-book-managment-using-websocket",
+    "name": "Binance order book managment using websocket",
+    "snippet": "I have a question regarding the suggested implementation that is in binance documentation. The guidelines are avaliable on the link: How to manage a local ... Read more",
+    "host_name": "stackoverflow.com",
+    "rank": 4,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://www.reddit.com/r/algotrading/comments/m3jmgr/binance_orderbook_via_websockets",
+    "name": "Binance orderbook via websockets : r/algotrading",
+    "snippet": "A local depth_cache is the fastest way to access the current order book depth at any time while transferring as little data as necessary. Read more",
+    "host_name": "www.reddit.com",
+    "rank": 5,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://developers.binance.com/docs/derivatives/usds-margined-futures/websocket-market-streams/How-to-manage-a-local-order-book-correctly",
+    "name": "How To Manage A Local Order Book Correctly",
+    "snippet": "How to manage a local order book correctly . Open a stream to wss://fstream.binance.com/stream?streams=btcusdt@depth. Buffer the events you receive from the ... Read more",
+    "host_name": "developers.binance.com",
+    "rank": 6,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/topics/orderbook-tick-data",
+    "name": "orderbook-tick-data",
+    "snippet": "A Python library to efficiently and concurrently download historical data files from Binance . Supports all asset types (spot, USDT-M, COIN-M, options) and all ... Read more",
+    "host_name": "github.com",
+    "rank": 7,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://developers.binance.com/docs/binance-spot-api-docs",
+    "name": "Changelog | Binance Open Platform",
+    "snippet": "Query order lists requests will first query the data in the cache , and if it cannot be found, will query the database. REST API: GET /api/v3/openOrderLists ... Read more",
+    "host_name": "developers.binance.com",
+    "rank": 8,
+    "date": "",
+    "favicon": ""
+  },
+  {
+    "url": "https://github.com/bitrich-info/xchange-stream/issues/86",
+    "name": "Binance Orderbook Streaming implementation doesn't take",
+    "snippet": "31 Jan 2018 — The recommendation is to get the snapshot of full orderbook on 3rd step, and then apply updates on it. The current implementation doesn't take the snapshot. Read more",
+    "host_name": "github.com",
+    "rank": 9,
+    "date": "",
+    "favicon": ""
+  }
+]
